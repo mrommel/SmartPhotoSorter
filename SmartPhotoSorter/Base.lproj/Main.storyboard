@@ -35,6 +35,7 @@
                     <navigationItem key="navigationItem" id="VVn-61-Ar9"/>
                     <connections>
                         <segue destination="MYc-Z4-uxK" kind="show" identifier="showScores" id="yjI-SC-FC7"/>
+                        <segue destination="kqP-VU-K1M" kind="show" identifier="showGames" id="so7-rm-qdu"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4qw-cD-yxl" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -68,6 +69,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oM9-zJ-OhA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2120.8000000000002" y="-147.07646176911544"/>
+        </scene>
+        <!--Games View Controller-->
+        <scene sceneID="hFq-x5-Yrz">
+            <objects>
+                <tableViewController id="kqP-VU-K1M" customClass="GamesViewController" customModule="SmartPhotoSorter" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="dy4-iG-fIt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextCell" id="D9E-pQ-pJt">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="D9E-pQ-pJt" id="suq-dR-3Db">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="kqP-VU-K1M" id="l4N-4N-TQx"/>
+                            <outlet property="delegate" destination="kqP-VU-K1M" id="MNL-sF-Zra"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YOe-gK-K7v" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2121" y="-844"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Cdv-jM-JC1">

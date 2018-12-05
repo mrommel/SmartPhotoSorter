@@ -6,8 +6,6 @@
 //  Copyright © 2018 Michael Rommel. All rights reserved.
 //
 
-import Foundation
-
 import UIKit
 
 struct ScoreItem {
@@ -26,7 +24,8 @@ class ScoresViewController: UITableViewController {
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
+
+		self.title = "Scores"
 	}
 }
 

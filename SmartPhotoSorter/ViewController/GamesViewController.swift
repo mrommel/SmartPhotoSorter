@@ -1,5 +1,5 @@
 //
-//  MainController.swift
+//  GamesViewController.swift
 //  SmartPhotoSorter
 //
 //  Created by Michael Rommel on 05.12.18.
@@ -8,61 +8,63 @@
 
 import UIKit
 
-struct MenuItem {
+struct GameItem {
 	let title: String
-	let segue: String?
+	let photos: Int
+
+	// maybe add photos here
 }
 
-class MainController: UITableViewController {
+class GamesViewController: UITableViewController {
 
-	let menuItems: [MenuItem] = [
-		MenuItem(title: "Start Game", segue: "goToGame"),
-		MenuItem(title: "Scores", segue: "showScores"),
-		MenuItem(title: "Options", segue: "goToOptions")
+	let gameItems: [GameItem] = [
+		GameItem(title: "Spiel 1", photos: 20),
+		GameItem(title: "Spiel 2", photos: 32),
+		GameItem(title: "Spiel 3", photos: 12)
 	]
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		// Do any additional setup after loading the view, typically from a nib.
+
+		self.title = "Games"
 	}
 }
 
 // MARK: UITableViewDataSource
 
-extension MainController {
+extension GamesViewController {
 
 	override func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
 	}
 
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return menuItems.count
+		return gameItems.count
 	}
 }
 
 // MARK: UITableViewDelegate
 
-extension MainController {
+extension GamesViewController {
 
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
 		let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath)
-		let menuItem = menuItems[indexPath.row]
-		cell.textLabel?.text = "\(menuItem.title)"
+		let gameItem = gameItems[indexPath.row]
+		cell.textLabel?.text = "\(gameItem.title) - \(gameItem.photos)"
 
 		return cell
 	}
 
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let menuItem = menuItems[indexPath.row]
+		//let menuItem = scoreItems[indexPath.row]
 
-		if let segue = menuItem.segue {
-			self.performSegue(withIdentifier: segue, sender: self)
-		}
+		/*if let segue = scoreItems.segue {
+		self.performSegue(withIdentifier: segue, sender: self)
+		}*/
 	}
 
 	override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 		return nil
 	}
 }
-
