@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Rswift
 
 struct MenuItem {
 	let title: String
@@ -24,7 +25,7 @@ class MainController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		self.title = "SmartPhotoSorter"
+		self.title = R.string.localizable.mainTitle() 
 	}
 }
 
