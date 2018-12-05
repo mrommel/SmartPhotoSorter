@@ -14,12 +14,18 @@ struct MenuItem {
 	let segue: String?
 }
 
+private enum Constants {
+	static let showGames = "showGames"
+	static let showScores = "showScores"
+	static let showOptions = "showOptions"
+}
+
 class MainController: UITableViewController {
 
 	let menuItems: [MenuItem] = [
-		MenuItem(title: "Start Game", segue: "showGames"),
-		MenuItem(title: "Scores", segue: "showScores"),
-		MenuItem(title: "Options", segue: "showOptions")
+		MenuItem(title: R.string.localizable.mainMenuGames(), segue: Constants.showGames),
+		MenuItem(title: R.string.localizable.mainMenuScores(), segue: Constants.showScores),
+		MenuItem(title: R.string.localizable.mainMenuOptions(), segue: Constants.showOptions)
 	]
 
 	override func viewDidLoad() {

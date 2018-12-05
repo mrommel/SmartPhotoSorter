@@ -86,8 +86,8 @@
 		0458729A21B7C6B1001B43A8 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				0458729D21B7C8D2001B43A8 /* GamesViewController.swift */,
 				0458729C21B7C8D2001B43A8 /* MainController.swift */,
+				0458729D21B7C8D2001B43A8 /* GamesViewController.swift */,
 				0458729B21B7C8D2001B43A8 /* ScoresViewController.swift */,
 			);
 			path = ViewController;
