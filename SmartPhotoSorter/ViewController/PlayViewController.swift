@@ -13,6 +13,8 @@ class PlayViewController: UIViewController {
 
 	@IBOutlet weak var collectionView: UICollectionView!
 
+	var game: Game? = nil
+
 	var images = [SKPhotoProtocol]()
 
 	override func viewDidLoad() {
@@ -24,8 +26,10 @@ class PlayViewController: UIViewController {
 		SKPhotoBrowserOptions.displayCounterLabel = true
 		SKPhotoBrowserOptions.displayBackAndForwardButton = true
 
-		self.setupTestData()
+		self.setupPhotoData()
 		self.setupCollectionView()
+
+		self.title = game?.name ?? "No Game"
 	}
 
 	override var prefersStatusBarHidden: Bool {
@@ -118,7 +122,7 @@ extension PlayViewController: SKPhotoBrowserDelegate {
 // MARK: - private
 private extension PlayViewController {
 
-	func setupTestData() {
+	func setupPhotoData() {
 		images = createLocalPhotos()
 	}
 
@@ -129,7 +133,7 @@ private extension PlayViewController {
 
 	func createLocalPhotos() -> [SKPhotoProtocol] {
 		return (0..<10).map { (i: Int) -> SKPhotoProtocol in
-			let photo = SKPhoto.photoWithImage(UIImage(named: "image\(i%10).jpg")!)
+			let photo = SKPhoto.photoWithImage(UIImage(named: "image\(i%10)")!)
 			photo.caption = caption[i%10]
 			return photo
 		}

@@ -15,6 +15,10 @@ struct GameItem {
 	// maybe add photos here
 }
 
+private enum Constants {
+	static let startGame = "startGame"
+}
+
 class GamesViewController: UITableViewController {
 
 	let gameItems: [GameItem] = [
@@ -22,6 +26,8 @@ class GamesViewController: UITableViewController {
 		GameItem(title: "Spiel 2", photos: 32),
 		GameItem(title: "Spiel 3", photos: 12)
 	]
+
+	var game: Game? = nil
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -57,8 +63,40 @@ extension GamesViewController {
 	}
 
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let segue = "startGame"
-		self.performSegue(withIdentifier: segue, sender: self)
+
+		let nameOfGame = "abc" // FIXME
+
+		let alert = UIAlertController(title: "Name", message: "Please enter your name", preferredStyle: .alert)
+
+		let saveAction = UIAlertAction(title: "Save", style: .default) { [unowned self] action in
+
+			guard let textField = alert.textFields?.first, let nameOfPlayer = textField.text else {
+				return
+			}
+
+			self.game = Game(name: nameOfGame, player: nameOfPlayer)
+
+			self.performSegue(withIdentifier: Constants.startGame, sender: self)
+		}
+
+		let cancelAction = UIAlertAction(title: "Cancel",
+										 style: .cancel)
+
+		alert.addTextField()
+
+		alert.addAction(saveAction)
+		alert.addAction(cancelAction)
+
+		present(alert, animated: true)
+	}
+
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+		if segue.identifier == Constants.startGame {
+
+			let destination = segue.destination as? PlayViewController
+			destination?.game = self.game
+		}
 	}
 
 	override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

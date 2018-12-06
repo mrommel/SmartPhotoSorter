@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		044DB9A821B80660000B14DA /* PlayerNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044DB9A721B80660000B14DA /* PlayerNameViewController.swift */; };
 		044DB9AA21B8068F000B14DA /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044DB9A921B8068F000B14DA /* PlayViewController.swift */; };
+		044DB9AF21B91413000B14DA /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044DB9AE21B91413000B14DA /* Game.swift */; };
 		0458728221B7B686001B43A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458728121B7B686001B43A8 /* AppDelegate.swift */; };
 		0458728721B7B686001B43A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0458728521B7B686001B43A8 /* Main.storyboard */; };
 		0458728A21B7B686001B43A8 /* SmartPhotoSorter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0458728821B7B686001B43A8 /* SmartPhotoSorter.xcdatamodeld */; };
@@ -23,8 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		044DB9A721B80660000B14DA /* PlayerNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerNameViewController.swift; sourceTree = "<group>"; };
 		044DB9A921B8068F000B14DA /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
+		044DB9AE21B91413000B14DA /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		0458727E21B7B686001B43A8 /* SmartPhotoSorter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartPhotoSorter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0458728121B7B686001B43A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0458728621B7B686001B43A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -54,6 +54,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		044DB9AD21B91330000B14DA /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				044DB9AE21B91413000B14DA /* Game.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		0458727521B7B686001B43A8 = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +83,7 @@
 		0458728021B7B686001B43A8 /* SmartPhotoSorter */ = {
 			isa = PBXGroup;
 			children = (
+				044DB9AD21B91330000B14DA /* Data */,
 				0458729A21B7C6B1001B43A8 /* ViewController */,
 				045872A121B7DDB7001B43A8 /* Ressources */,
 				0458728121B7B686001B43A8 /* AppDelegate.swift */,
@@ -93,7 +102,6 @@
 				0458729C21B7C8D2001B43A8 /* MainController.swift */,
 				0458729D21B7C8D2001B43A8 /* GamesViewController.swift */,
 				0458729B21B7C8D2001B43A8 /* ScoresViewController.swift */,
-				044DB9A721B80660000B14DA /* PlayerNameViewController.swift */,
 				044DB9A921B8068F000B14DA /* PlayViewController.swift */,
 			);
 			path = ViewController;
@@ -271,10 +279,10 @@
 				0458729F21B7C8D2001B43A8 /* MainController.swift in Sources */,
 				0458728221B7B686001B43A8 /* AppDelegate.swift in Sources */,
 				0458729E21B7C8D2001B43A8 /* ScoresViewController.swift in Sources */,
-				044DB9A821B80660000B14DA /* PlayerNameViewController.swift in Sources */,
 				0458728A21B7B686001B43A8 /* SmartPhotoSorter.xcdatamodeld in Sources */,
 				045872A021B7C8D2001B43A8 /* GamesViewController.swift in Sources */,
 				045872AA21B7DFC5001B43A8 /* R.generated.swift in Sources */,
+				044DB9AF21B91413000B14DA /* Game.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
