@@ -12,6 +12,7 @@ import SKPhotoBrowser
 class PlayViewController: UIViewController {
 
 	@IBOutlet weak var collectionView: UICollectionView!
+	fileprivate var longPressGesture: UILongPressGestureRecognizer!
 
 	var game: Game? = nil
 
@@ -55,7 +56,7 @@ extension PlayViewController: UICollectionViewDataSource {
 
 		// cell.backgroundColor = .white
 
-		cell.photoImageView.image = UIImage(named: "image\((indexPath as NSIndexPath).row % 10)")
+		cell.photoImageView.image = self.images[(indexPath as NSIndexPath).row].underlyingImage
 		cell.photoImageView.contentMode = .scaleAspectFit
 		
 		return cell
@@ -67,6 +68,7 @@ extension PlayViewController: UICollectionViewDelegate {
 
 	@objc(collectionView:didSelectItemAtIndexPath:) func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		let browser = SKPhotoBrowser(photos: images, initialPageIndex: indexPath.row)
+
 		browser.delegate = self
 
 		present(browser, animated: true, completion: {})
@@ -78,6 +80,24 @@ extension PlayViewController: UICollectionViewDelegate {
 		} else {
 			return CGSize(width: UIScreen.main.bounds.size.width / 2 - 5, height: 200)
 		}
+	}
+
+	// enable drag'n'drop
+	func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+		return true
+	}
+
+	func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+		print("Starting Index: \(sourceIndexPath.item)")
+		print("Ending Index: \(destinationIndexPath.item)")
+
+		// FIXME
+		// currentgame swap images
+		let img = images[sourceIndexPath.item]
+		images[sourceIndexPath.item] = images[destinationIndexPath.item]
+		images[destinationIndexPath.item] = img
+
+		self.collectionView.reloadData()
 	}
 }
 
@@ -129,6 +149,9 @@ private extension PlayViewController {
 	func setupCollectionView() {
 		collectionView.delegate = self
 		collectionView.dataSource = self
+
+		self.longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongGesture(gesture:)))
+		collectionView.addGestureRecognizer(longPressGesture)
 	}
 
 	func createLocalPhotos() -> [SKPhotoProtocol] {
@@ -136,6 +159,23 @@ private extension PlayViewController {
 			let photo = SKPhoto.photoWithImage(UIImage(named: "image\(i%10)")!)
 			photo.caption = caption[i%10]
 			return photo
+		}
+	}
+
+	@objc func handleLongGesture(gesture: UILongPressGestureRecognizer) {
+		switch(gesture.state) {
+
+		case .began:
+			guard let selectedIndexPath = collectionView.indexPathForItem(at: gesture.location(in: collectionView)) else {
+				break
+			}
+			collectionView.beginInteractiveMovementForItem(at: selectedIndexPath)
+		case .changed:
+			collectionView.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
+		case .ended:
+			collectionView.endInteractiveMovement()
+		default:
+			collectionView.cancelInteractiveMovement()
 		}
 	}
 }
