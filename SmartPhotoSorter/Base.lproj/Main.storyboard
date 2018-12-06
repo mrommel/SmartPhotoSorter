@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -93,10 +94,68 @@
                             <outlet property="delegate" destination="kqP-VU-K1M" id="MNL-sF-Zra"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="vcz-dc-2gZ" kind="show" identifier="startGame" id="2Db-nB-i95"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YOe-gK-K7v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2121" y="-844"/>
+        </scene>
+        <!--Play View Controller-->
+        <scene sceneID="arl-28-cgv">
+            <objects>
+                <viewController id="vcz-dc-2gZ" customClass="PlayViewController" customModule="SmartPhotoSorter" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7VJ-lx-75k">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="TE5-Jf-c7P">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="YKZ-7t-XaN">
+                                    <size key="itemSize" width="182" height="182"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="exampleCollectionViewCell" reuseIdentifier="photoCollectionViewCell" id="2Ug-Qe-8Xy" customClass="PhotoCollectionViewCell" customModule="SmartPhotoSorter" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="182" height="182"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="182" height="182"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dyd-Cw-RwF">
+                                                    <rect key="frame" x="0.0" y="0.0" width="182" height="182"/>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="dyd-Cw-RwF" secondAttribute="bottom" id="d7N-UL-hbF"/>
+                                            <constraint firstAttribute="trailing" secondItem="dyd-Cw-RwF" secondAttribute="trailing" id="hge-NQ-YxP"/>
+                                            <constraint firstItem="dyd-Cw-RwF" firstAttribute="top" secondItem="2Ug-Qe-8Xy" secondAttribute="top" id="qOM-0z-M5s"/>
+                                            <constraint firstItem="dyd-Cw-RwF" firstAttribute="leading" secondItem="2Ug-Qe-8Xy" secondAttribute="leading" id="ybs-iC-6Ai"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="exampleImageView" destination="dyd-Cw-RwF" id="Dl5-E1-mnX"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="dSx-eN-UrN"/>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="TE5-Jf-c7P" id="6YC-Rl-McI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8jq-EB-b3b" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2908" y="-845.1274362818591"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Cdv-jM-JC1">

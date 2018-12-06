@@ -57,11 +57,8 @@ extension GamesViewController {
 	}
 
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		//let menuItem = scoreItems[indexPath.row]
-
-		/*if let segue = scoreItems.segue {
+		let segue = "startGame"
 		self.performSegue(withIdentifier: segue, sender: self)
-		}*/
 	}
 
 	override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

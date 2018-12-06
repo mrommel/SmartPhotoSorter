@@ -2,23 +2,27 @@ PODS:
   - R.swift (5.0.0.alpha.2):
     - R.swift.Library (~> 5.0.0.alpha.2)
   - R.swift.Library (5.0.0.alpha.2)
+  - SKPhotoBrowser (6.0.0)
   - SwiftLint (0.29.1)
 
 DEPENDENCIES:
   - R.swift (= 5.0.0.alpha.2)
+  - SKPhotoBrowser
   - SwiftLint
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - R.swift
     - R.swift.Library
+    - SKPhotoBrowser
     - SwiftLint
 
 SPEC CHECKSUMS:
   R.swift: 31fa1bd537fa81307815cc622122f33331f32174
   R.swift.Library: 3c21b823839bf5a6769dc7f96cb44479dab51b1b
+  SKPhotoBrowser: 76eb862685761707b5745fde7762757966565e07
   SwiftLint: 6772320e40b52049053a518c17db9b0634a0b45a
 
-PODFILE CHECKSUM: 6014f2ce70324c6a9cd719de2a9491a41f8db0f6
+PODFILE CHECKSUM: 9d9647e720b1eeaeaf9743c01b5b16ee2fa516ce
 
 COCOAPODS: 1.5.3
