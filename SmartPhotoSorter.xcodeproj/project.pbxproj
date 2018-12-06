@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		044DB9AA21B8068F000B14DA /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044DB9A921B8068F000B14DA /* PlayViewController.swift */; };
 		044DB9AF21B91413000B14DA /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044DB9AE21B91413000B14DA /* Game.swift */; };
+		044DB9B121B93C8C000B14DA /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 044DB9B021B93C8C000B14DA /* README.md */; };
 		0458728221B7B686001B43A8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0458728121B7B686001B43A8 /* AppDelegate.swift */; };
 		0458728721B7B686001B43A8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0458728521B7B686001B43A8 /* Main.storyboard */; };
 		0458728A21B7B686001B43A8 /* SmartPhotoSorter.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0458728821B7B686001B43A8 /* SmartPhotoSorter.xcdatamodeld */; };
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		044DB9A921B8068F000B14DA /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		044DB9AE21B91413000B14DA /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		044DB9B021B93C8C000B14DA /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		0458727E21B7B686001B43A8 /* SmartPhotoSorter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartPhotoSorter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0458728121B7B686001B43A8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0458728621B7B686001B43A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				0458728021B7B686001B43A8 /* SmartPhotoSorter */,
+				044DB9B021B93C8C000B14DA /* README.md */,
 				0458727F21B7B686001B43A8 /* Products */,
 				646DCA125C2DB263D2E72F5B /* Pods */,
 				60B3262DDD647A1985632718 /* Frameworks */,
@@ -196,6 +199,7 @@
 			files = (
 				0458728F21B7B688001B43A8 /* LaunchScreen.storyboard in Resources */,
 				045872A421B7DDF8001B43A8 /* Localizable.strings in Resources */,
+				044DB9B121B93C8C000B14DA /* README.md in Resources */,
 				0458728C21B7B688001B43A8 /* Assets.xcassets in Resources */,
 				0458728721B7B686001B43A8 /* Main.storyboard in Resources */,
 			);
