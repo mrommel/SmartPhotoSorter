@@ -128,7 +128,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="182" height="182"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dyd-Cw-RwF">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dyd-Cw-RwF" userLabel="Photo Image View">
                                                     <rect key="frame" x="0.0" y="0.0" width="182" height="182"/>
                                                 </imageView>
                                             </subviews>
@@ -140,7 +140,7 @@
                                             <constraint firstItem="dyd-Cw-RwF" firstAttribute="leading" secondItem="2Ug-Qe-8Xy" secondAttribute="leading" id="ybs-iC-6Ai"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="exampleImageView" destination="dyd-Cw-RwF" id="Dl5-E1-mnX"/>
+                                            <outlet property="photoImageView" destination="dyd-Cw-RwF" id="Qev-Gb-lNl"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

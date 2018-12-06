@@ -49,8 +49,11 @@ extension PlayViewController: UICollectionViewDataSource {
 			return UICollectionViewCell()
 		}
 
-		cell.exampleImageView.image = UIImage(named: "image\((indexPath as NSIndexPath).row % 10)")
-		// cell.exampleImageView.contentMode = .ScaleAspectFill
+		// cell.backgroundColor = .white
+
+		cell.photoImageView.image = UIImage(named: "image\((indexPath as NSIndexPath).row % 10)")
+		cell.photoImageView.contentMode = .scaleAspectFit
+		
 		return cell
 	}
 }
@@ -134,17 +137,19 @@ private extension PlayViewController {
 }
 
 class PhotoCollectionViewCell: UICollectionViewCell {
-	@IBOutlet weak var exampleImageView: UIImageView!
+
+	@IBOutlet weak var photoImageView: UIImageView!
 
 	override func awakeFromNib() {
 		super.awakeFromNib()
-		exampleImageView.image = nil
-		//        layer.cornerRadius = 25.0
+
+		self.photoImageView.image = nil
+		layer.cornerRadius = 25.0
 		layer.masksToBounds = true
 	}
 
 	override func prepareForReuse() {
-		exampleImageView.image = nil
+		self.photoImageView.image = nil
 	}
 }
 
