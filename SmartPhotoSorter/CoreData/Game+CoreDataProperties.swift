@@ -44,7 +44,7 @@ extension Game {
 
 		let photo = NSManagedObject(entity: photoEntity, insertInto: managedContext)
 		photo.setValue(name, forKeyPath: "name")
-		photo.setValue(image.pngData(), forKeyPath: "image")
+		photo.setValue(image.pngData(), forKeyPath: "imageData")
 		photo.setValue(self, forKeyPath: "game")
 		photo.setValue(order, forKeyPath: "order")
 

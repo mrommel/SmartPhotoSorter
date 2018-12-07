@@ -15,4 +15,12 @@ class GameViewModel {
 	init(name: String) {
 		self.name = name
 	}
+
+	func amountOfImages() -> Int {
+		return 10
+	}
+
+	func score() -> Int {
+		return 10
+	}
 }

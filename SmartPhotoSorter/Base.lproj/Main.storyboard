@@ -37,11 +37,12 @@
                     <connections>
                         <segue destination="MYc-Z4-uxK" kind="show" identifier="showScores" id="yjI-SC-FC7"/>
                         <segue destination="kqP-VU-K1M" kind="show" identifier="showGames" id="so7-rm-qdu"/>
+                        <segue destination="HVv-bo-LYe" kind="show" identifier="showOptions" id="6qc-Pb-wHO"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4qw-cD-yxl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1391.2" y="-146.17691154422789"/>
+            <point key="canvasLocation" x="1274" y="-146"/>
         </scene>
         <!--Scores View Controller-->
         <scene sceneID="bIN-Ev-4z7">
@@ -69,7 +70,35 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oM9-zJ-OhA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2120.8000000000002" y="-147.07646176911544"/>
+            <point key="canvasLocation" x="1273" y="743"/>
+        </scene>
+        <!--Options View Controller-->
+        <scene sceneID="4vb-Ri-YDw">
+            <objects>
+                <tableViewController id="HVv-bo-LYe" customClass="OptionsViewController" customModule="SmartPhotoSorter" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Va1-XF-3wP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TextCell" id="91D-o2-bGn">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="91D-o2-bGn" id="kkX-LS-Xh9">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="HVv-bo-LYe" id="8vN-zr-HKz"/>
+                            <outlet property="delegate" destination="HVv-bo-LYe" id="CY3-wf-EOa"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7lJ-dr-YEL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2105" y="743"/>
         </scene>
         <!--Games View Controller-->
         <scene sceneID="hFq-x5-Yrz">
@@ -95,12 +124,12 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <segue destination="RIT-cB-lCy" kind="show" identifier="startGame" id="2Db-nB-i95"/>
+                        <segue destination="vcz-dc-2gZ" kind="show" identifier="startGame" id="y8y-bk-oUE"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YOe-gK-K7v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2121" y="-844"/>
+            <point key="canvasLocation" x="452" y="743"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="arl-28-cgv">
@@ -164,7 +193,7 @@
                         <viewLayoutGuide key="safeArea" id="dSx-eN-UrN"/>
                     </view>
                     <navigationItem key="navigationItem" id="4Zf-da-dnF">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="done" id="NWQ-Tg-ojY">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="NWQ-Tg-ojY">
                             <connections>
                                 <action selector="finishBarButtonItemTapWithSender:" destination="vcz-dc-2gZ" id="MtW-Qp-bHs"/>
                             </connections>
@@ -176,7 +205,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8jq-EB-b3b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3847.1999999999998" y="-845.1274362818591"/>
+            <point key="canvasLocation" x="452" y="1489"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Cdv-jM-JC1">
@@ -195,24 +224,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yuV-Cw-djv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="452" y="-146.17691154422789"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="wpj-oS-8we">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RIT-cB-lCy" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="bGe-W7-B1d">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="vcz-dc-2gZ" kind="relationship" relationship="rootViewController" id="qZD-ZT-uew"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Qil-y0-xzm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2908" y="-845.1274362818591"/>
         </scene>
     </scenes>
     <resources>

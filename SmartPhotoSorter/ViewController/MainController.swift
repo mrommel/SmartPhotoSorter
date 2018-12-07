@@ -11,6 +11,7 @@ import Rswift
 
 struct MenuItem {
 	let title: String
+	let image: UIImage?
 	let segue: String?
 }
 
@@ -23,13 +24,17 @@ private enum Constants {
 class MainController: UITableViewController {
 
 	let menuItems: [MenuItem] = [
-		MenuItem(title: R.string.localizable.mainMenuGames(), segue: Constants.showGames),
-		MenuItem(title: R.string.localizable.mainMenuScores(), segue: Constants.showScores),
-		MenuItem(title: R.string.localizable.mainMenuOptions(), segue: Constants.showOptions)
+		MenuItem(title: R.string.localizable.mainMenuGames(), image: R.image.rocket(), segue: Constants.showGames),
+		MenuItem(title: R.string.localizable.mainMenuScores(), image: R.image.score(), segue: Constants.showScores),
+		MenuItem(title: R.string.localizable.mainMenuOptions(), image: R.image.options(), segue: Constants.showOptions)
 	]
+
+	let theme = ThemeManager.currentTheme()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+
+		self.view.backgroundColor = theme.backgroundColor
 
 		self.title = R.string.localizable.mainTitle() 
 	}
@@ -56,7 +61,9 @@ extension MainController {
 
 		let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath)
 		let menuItem = menuItems[indexPath.row]
-		cell.textLabel?.text = "\(menuItem.title)"
+
+		cell.imageView?.image = menuItem.image
+		cell.textLabel?.text = menuItem.title
 
 		return cell
 	}
@@ -71,14 +78,14 @@ extension MainController {
 
 	override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
-		let headerImage: UIImage = UIImage(named: "Splash")!
+		let headerImage: UIImage = R.image.splash()!
 		let headerView = UIImageView(image: headerImage)
 		headerView.contentMode = .scaleAspectFit
 		return headerView
 	}
 
 	override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		return 120
+		return 180
 	}
 
 	override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

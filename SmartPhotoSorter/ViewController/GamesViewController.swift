@@ -17,11 +17,15 @@ private enum Constants {
 class GamesViewController: UITableViewController {
 
 	var viewModel: GamesViewModel? = nil
+	let theme = ThemeManager.currentTheme()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
 		self.viewModel = GamesViewModel()
+		
+		self.view.backgroundColor = theme.backgroundColor
+
 		self.title = R.string.localizable.gamesTitle()
 	}
 }
@@ -43,10 +47,24 @@ extension GamesViewController {
 
 extension GamesViewController {
 
+	override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+		let headerImage: UIImage = R.image.rocket()!
+		let headerView = UIImageView(image: headerImage)
+		headerView.contentMode = .scaleAspectFit
+		return headerView
+	}
+
+	override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		return 180
+	}
+
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
 		let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath)
 		let gamesItem = self.viewModel?.item(at: indexPath.row)
+
+		cell.imageView?.image = R.image.rocket()
 		cell.textLabel?.text = "\(gamesItem?.title ?? R.string.localizable.gamesErrorNoGame())"
 
 		return cell

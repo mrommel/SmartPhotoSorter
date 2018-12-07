@@ -1,28 +1,17 @@
 //
-//  ScoresViewController.swift
+//  OptionsViewController.swift
 //  SmartPhotoSorter
 //
-//  Created by Michael Rommel on 05.12.18.
+//  Created by Michael Rommel on 07.12.18.
 //  Copyright © 2018 Michael Rommel. All rights reserved.
 //
 
 import UIKit
 import Rswift
 
-struct ScoreItem {
-	let title: String
-	let player: String
-	let score: Int
-}
+class OptionsViewController: UITableViewController {
 
-class ScoresViewController: UITableViewController {
-
-	let scoreItems: [ScoreItem] = [
-		ScoreItem(title: "Spiel 1", player: "Michael", score: 45),
-		ScoreItem(title: "Spiel 1", player: "Ines", score: 32),
-		ScoreItem(title: "Spiel 3", player: "Michael", score: 45)
-	]
-
+	let viewModel: OptionsViewModel = OptionsViewModel()
 	let theme = ThemeManager.currentTheme()
 
 	override func viewDidLoad() {
@@ -30,30 +19,30 @@ class ScoresViewController: UITableViewController {
 
 		self.view.backgroundColor = theme.backgroundColor
 
-		self.title = "Scores"
+		self.title = "Options"
 	}
 }
 
 // MARK: UITableViewDataSource
 
-extension ScoresViewController {
+extension OptionsViewController {
 
 	override func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
 	}
 
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return scoreItems.count
+		return self.viewModel.optionsItems.count
 	}
 }
 
 // MARK: UITableViewDelegate
 
-extension ScoresViewController {
+extension OptionsViewController {
 
 	override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
-		let headerImage: UIImage = R.image.score()!
+		let headerImage: UIImage = R.image.options()!
 		let headerView = UIImageView(image: headerImage)
 		headerView.contentMode = .scaleAspectFit
 		return headerView
@@ -66,18 +55,26 @@ extension ScoresViewController {
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
 		let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath)
-		let menuItem = scoreItems[indexPath.row]
-		cell.textLabel?.text = "\(menuItem.title) - \(menuItem.player) - \(menuItem.score)"
+		let optionItem = self.viewModel.item(at: indexPath.row)
+
+		cell.imageView?.image = optionItem.image
+		cell.textLabel?.text = optionItem.title
 
 		return cell
 	}
 
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		//let menuItem = scoreItems[indexPath.row]
 
-		/*if let segue = scoreItems.segue {
-			self.performSegue(withIdentifier: segue, sender: self)
-		}*/
+		let optionItem = self.viewModel.item(at: indexPath.row)
+
+		switch(optionItem.identifier) {
+		case .populate:
+			self.viewModel.initData()
+		case .reset:
+			self.viewModel.resetData()
+		}
+
+		self.dese
 	}
 
 	override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

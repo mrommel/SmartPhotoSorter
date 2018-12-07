@@ -22,6 +22,7 @@ class GameViewController: UIViewController {
 	var viewModel: GameViewModel? = nil
 
 	var images = [SKPhotoProtocol]()
+	let theme = ThemeManager.currentTheme()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -34,6 +35,8 @@ class GameViewController: UIViewController {
 
 		self.setupPhotoData()
 		self.setupCollectionView()
+
+		self.view.backgroundColor = theme.backgroundColor
 
 		self.title = viewModel?.name ?? R.string.localizable.gameTitleNoGame()
 	}
@@ -52,6 +55,8 @@ class GameViewController: UIViewController {
 		alert.addAction(UIAlertAction(title: R.string.localizable.gameFinishDone(), style: .default, handler: { action in
 
 			print("Save")
+			// self.viewModel.
+			// inform user about result
 		}))
 		alert.addAction(UIAlertAction(title: R.string.localizable.gameFinishCancel(), style: .cancel, handler: nil))
 		self.present(alert, animated: true)
@@ -108,7 +113,8 @@ extension GameViewController: UICollectionViewDelegate {
 		images[sourceIndexPath.item] = images[destinationIndexPath.item]
 		images[destinationIndexPath.item] = img
 
-		// => calculate score => store value in db
+		// inform view model
+		//self.viewModel
 
 		self.collectionView.reloadData()
 	}
@@ -168,7 +174,10 @@ private extension GameViewController {
 	}
 
 	func createLocalPhotos() -> [SKPhotoProtocol] {
-		return (0..<10).map { (i: Int) -> SKPhotoProtocol in
+
+		let amountOfImages = self.viewModel?.amountOfImages() ?? 0
+
+		return (0..<amountOfImages).map { (i: Int) -> SKPhotoProtocol in
 			let photo = SKPhoto.photoWithImage(UIImage(named: "image\(i%10)")!)
 			photo.caption = R.string.localizable.gameDetailCaption()
 			return photo

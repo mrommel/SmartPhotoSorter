@@ -18,53 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
-		// init data, if not already there
-		if self.needData() {
-			self.initData()
-		}
+		// Override point for customization after application launch.
+		ThemeManager.applyTheme(theme: .dark)
 
 		return true
-	}
-
-	func needData() -> Bool {
-
-		let provider = GameProvider()
-		guard let games = provider.games() else {
-			return true
-		}
-
-		if games.count == 0 {
-			return true
-		}
-
-		return false
-	}
-
-	func initData() {
-
-		let provider = GameProvider()
-
-		// players
-		provider.createPlayer(with: "Michael")
-		provider.createPlayer(with: "Ines")
-		provider.createPlayer(with: "Annalena")
-		provider.createPlayer(with: "Marcel")
-
-		// game "holiday"
-		let holiday = provider.createGame(with: "Urlaub")
-		holiday?.add(photo: R.image.image0(), and: "Image 0", with: 0)
-		holiday?.add(photo: R.image.image1(), and: "Image 1", with: 1)
-		holiday?.add(photo: R.image.image2(), and: "Image 2", with: 2)
-		holiday?.add(photo: R.image.image3(), and: "Image 3", with: 3)
-
-		// game "childhood"
-		let childhood = provider.createGame(with: "Kindheit")
-		childhood?.add(photo: R.image.image4(), and: "Image 4", with: 4)
-		childhood?.add(photo: R.image.image5(), and: "Image 5", with: 5)
-		childhood?.add(photo: R.image.image6(), and: "Image 6", with: 6)
-		childhood?.add(photo: R.image.image7(), and: "Image 7", with: 7)
-		childhood?.add(photo: R.image.image8(), and: "Image 8", with: 8)
-		childhood?.add(photo: R.image.image9(), and: "Image 9", with: 9)
 	}
 
 	func applicationWillResignActive(_ application: UIApplication) {

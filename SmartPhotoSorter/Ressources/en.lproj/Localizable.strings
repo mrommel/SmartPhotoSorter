@@ -25,6 +25,9 @@
 "Game.Title.NoGame" = "No Game";
 "Game.Detail.Caption" = "The chronological order can only be changed thru drag'n'drop in the list.b";
 "Game.Finish.Title" = "Ready";
-"Game.Finish.Description" = "Are you ready sorting the picture in chronological order?";
+"Game.Finish.Description" = "Are you ready sorting the pictures in chronological order?";
 "Game.Finish.Done" = "Done";
 "Game.Finish.Cancel" = "Cancel";
+
+/*** OptionsViewController ***/
+"Options.Title" = "Options";

@@ -67,7 +67,7 @@ class GamesViewModel: NSObject {
 		let game = provider.gameBy(index: self.gameOption.gameSelection)
 		let player = provider.playerBy(index: self.gameOption.playerSelection)
 
-		let gameViewModel = GameViewModel(name: "abc")
+		let gameViewModel = GameViewModel(name: game?.name ?? R.string.localizable.gamesErrorNoGame())
 
 		return gameViewModel
 	}
