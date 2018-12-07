@@ -1,5 +1,5 @@
 //
-//  PlayViewController.swift
+//  GameViewController.swift
 //  SmartPhotoSorter
 //
 //  Created by Michael Rommel on 05.12.18.
@@ -8,13 +8,18 @@
 
 import UIKit
 import SKPhotoBrowser
+import Rswift
 
-class PlayViewController: UIViewController {
+private enum Constants {
+	static let photoCollectionViewCell = "photoCollectionViewCell"
+}
+
+class GameViewController: UIViewController {
 
 	@IBOutlet weak var collectionView: UICollectionView!
 	fileprivate var longPressGesture: UILongPressGestureRecognizer!
 
-	var game: Game? = nil
+	var viewModel: GameViewModel? = nil
 
 	var images = [SKPhotoProtocol]()
 
@@ -30,7 +35,7 @@ class PlayViewController: UIViewController {
 		self.setupPhotoData()
 		self.setupCollectionView()
 
-		self.title = game?.name ?? "No Game"
+		self.title = viewModel?.name ?? R.string.localizable.gameTitleNoGame()
 	}
 
 	override var prefersStatusBarHidden: Bool {
@@ -38,23 +43,32 @@ class PlayViewController: UIViewController {
 	}
 
 	override var preferredStatusBarStyle: UIStatusBarStyle {
-		return .lightContent
+		return .`default`
+	}
+
+	@IBAction func finishBarButtonItemTap(sender: UIBarButtonItem) {
+
+		let alert = UIAlertController(title: R.string.localizable.gameFinishTitle(), message: R.string.localizable.gameFinishDescription(), preferredStyle: .alert)
+		alert.addAction(UIAlertAction(title: R.string.localizable.gameFinishDone(), style: .default, handler: { action in
+
+			print("Save")
+		}))
+		alert.addAction(UIAlertAction(title: R.string.localizable.gameFinishCancel(), style: .cancel, handler: nil))
+		self.present(alert, animated: true)
 	}
 }
 
 // MARK: - UICollectionViewDataSource
-extension PlayViewController: UICollectionViewDataSource {
+extension GameViewController: UICollectionViewDataSource {
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return images.count
 	}
 
 	@objc(collectionView:cellForItemAtIndexPath:) func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "photoCollectionViewCell", for: indexPath) as? PhotoCollectionViewCell else {
+		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.photoCollectionViewCell, for: indexPath) as? PhotoCollectionViewCell else {
 			return UICollectionViewCell()
 		}
-
-		// cell.backgroundColor = .white
 
 		cell.photoImageView.image = self.images[(indexPath as NSIndexPath).row].underlyingImage
 		cell.photoImageView.contentMode = .scaleAspectFit
@@ -64,7 +78,7 @@ extension PlayViewController: UICollectionViewDataSource {
 }
 
 // MARK: - UICollectionViewDelegate
-extension PlayViewController: UICollectionViewDelegate {
+extension GameViewController: UICollectionViewDelegate {
 
 	@objc(collectionView:didSelectItemAtIndexPath:) func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		let browser = SKPhotoBrowser(photos: images, initialPageIndex: indexPath.row)
@@ -88,21 +102,20 @@ extension PlayViewController: UICollectionViewDelegate {
 	}
 
 	func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-		print("Starting Index: \(sourceIndexPath.item)")
-		print("Ending Index: \(destinationIndexPath.item)")
 
-		// FIXME
-		// currentgame swap images
+		// current game swap images
 		let img = images[sourceIndexPath.item]
 		images[sourceIndexPath.item] = images[destinationIndexPath.item]
 		images[destinationIndexPath.item] = img
+
+		// => calculate score => store value in db
 
 		self.collectionView.reloadData()
 	}
 }
 
 // MARK: - SKPhotoBrowserDelegate
-extension PlayViewController: SKPhotoBrowserDelegate {
+extension GameViewController: SKPhotoBrowserDelegate {
 
 	func didShowPhotoAtIndex(_ index: Int) {
 		collectionView.visibleCells.forEach({$0.isHidden = false})
@@ -140,7 +153,7 @@ extension PlayViewController: SKPhotoBrowserDelegate {
 }
 
 // MARK: - private
-private extension PlayViewController {
+private extension GameViewController {
 
 	func setupPhotoData() {
 		images = createLocalPhotos()
@@ -157,7 +170,7 @@ private extension PlayViewController {
 	func createLocalPhotos() -> [SKPhotoProtocol] {
 		return (0..<10).map { (i: Int) -> SKPhotoProtocol in
 			let photo = SKPhoto.photoWithImage(UIImage(named: "image\(i%10)")!)
-			photo.caption = caption[i%10]
+			photo.caption = R.string.localizable.gameDetailCaption()
 			return photo
 		}
 	}
@@ -196,17 +209,3 @@ class PhotoCollectionViewCell: UICollectionViewCell {
 		self.photoImageView.image = nil
 	}
 }
-
-var caption = ["Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-			   "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
-			   "It has survived not only five centuries, but also the leap into electronic typesetting",
-			   "remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-			   "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-			   "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-			   "It has survived not only five centuries, but also the leap into electronic typesetting",
-			   "remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-			   "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-			   "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-			   "It has survived not only five centuries, but also the leap into electronic typesetting",
-			   "remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-]

@@ -7,8 +7,24 @@
 */
 "App.Title" = "Smart Photo Sorter";
 
-/*** MainController ***/
+/*** MainViewController ***/
 "Main.Title" = "Smart Photo Sorter";
 "Main.Menu.Games" = "Start Game";
 "Main.Menu.Scores" = "Start Scores";
 "Main.Menu.Options" = "Options";
+
+/*** GamesViewController ***/
+"Games.Title" = "Games";
+"Games.Error.NoGame" = "No Game";
+"Games.Player.Title" = "Choose player";
+"Games.Player.Description" = "Please select your player:";
+"Games.Player.Done" = "Done";
+"Games.Player.Cancel" = "Cancel";
+
+/*** GameViewController ***/
+"Game.Title.NoGame" = "No Game";
+"Game.Detail.Caption" = "The chronological order can only be changed thru drag'n'drop in the list.b";
+"Game.Finish.Title" = "Ready";
+"Game.Finish.Description" = "Are you ready sorting the picture in chronological order?";
+"Game.Finish.Done" = "Done";
+"Game.Finish.Cancel" = "Cancel";

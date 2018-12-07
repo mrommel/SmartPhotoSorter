@@ -7,32 +7,22 @@
 //
 
 import UIKit
-
-struct GameItem {
-	let title: String
-	let photos: Int
-
-	// maybe add photos here
-}
+import Rswift
 
 private enum Constants {
 	static let startGame = "startGame"
+	static let contentViewController = "contentViewController"
 }
 
 class GamesViewController: UITableViewController {
 
-	let gameItems: [GameItem] = [
-		GameItem(title: "Spiel 1", photos: 20),
-		GameItem(title: "Spiel 2", photos: 32),
-		GameItem(title: "Spiel 3", photos: 12)
-	]
-
-	var game: Game? = nil
+	var viewModel: GamesViewModel? = nil
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		self.title = "Games"
+		self.viewModel = GamesViewModel()
+		self.title = R.string.localizable.gamesTitle()
 	}
 }
 
@@ -45,7 +35,7 @@ extension GamesViewController {
 	}
 
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return gameItems.count
+		return self.viewModel?.gamesCount ?? 0
 	}
 }
 
@@ -56,50 +46,57 @@ extension GamesViewController {
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
 		let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath)
-		let gameItem = gameItems[indexPath.row]
-		cell.textLabel?.text = "\(gameItem.title) - \(gameItem.photos)"
+		let gamesItem = self.viewModel?.item(at: indexPath.row)
+		cell.textLabel?.text = "\(gamesItem?.title ?? R.string.localizable.gamesErrorNoGame())"
 
 		return cell
 	}
 
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-		let nameOfGame = "abc" // FIXME
+		// store selected game in view model
+		self.viewModel?.selectGameItem(at: indexPath.row)
 
-		let alert = UIAlertController(title: "Name", message: "Please enter your name", preferredStyle: .alert)
+		let vc = UIViewController()
+		vc.preferredContentSize = CGSize(width: 250,height: 300)
+		let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 250, height: 300))
+		pickerView.delegate = self
+		pickerView.dataSource = self.viewModel!
+		vc.view.addSubview(pickerView)
 
-		let saveAction = UIAlertAction(title: "Save", style: .default) { [unowned self] action in
+		let alert = UIAlertController(title: R.string.localizable.gamesPlayerTitle(), message: R.string.localizable.gamesPlayerDescription(), preferredStyle: .alert)
+		alert.setValue(vc, forKey: Constants.contentViewController)
+		alert.addAction(UIAlertAction(title: R.string.localizable.gamesPlayerDone(), style: .default, handler: { action in
 
-			guard let textField = alert.textFields?.first, let nameOfPlayer = textField.text else {
-				return
-			}
-
-			self.game = Game(name: nameOfGame, player: nameOfPlayer)
-
+			// start game
+			// a new game is prepared
 			self.performSegue(withIdentifier: Constants.startGame, sender: self)
-		}
-
-		let cancelAction = UIAlertAction(title: "Cancel",
-										 style: .cancel)
-
-		alert.addTextField()
-
-		alert.addAction(saveAction)
-		alert.addAction(cancelAction)
-
-		present(alert, animated: true)
+		}))
+		alert.addAction(UIAlertAction(title: R.string.localizable.gamesPlayerCancel(), style: .cancel, handler: nil))
+		self.present(alert, animated: true)
 	}
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
 		if segue.identifier == Constants.startGame {
 
-			let destination = segue.destination as? PlayViewController
-			destination?.game = self.game
+			let destination = segue.destination as? GameViewController
+			destination?.viewModel = self.viewModel?.createGameViewModel()
 		}
 	}
 
 	override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 		return nil
+	}
+}
+
+extension GamesViewController: UIPickerViewDelegate {
+
+	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+		self.viewModel?.selectPlayerItem(at: row)
+	}
+
+	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+		return self.viewModel?.playerName(at: row)
 	}
 }
