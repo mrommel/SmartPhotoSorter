@@ -9,19 +9,9 @@
 import UIKit
 import Rswift
 
-struct ScoreItem {
-	let title: String
-	let player: String
-	let score: Int
-}
-
 class ScoresViewController: BaseTableViewController {
 
-	let scoreItems: [ScoreItem] = [
-		ScoreItem(title: "Spiel 1", player: "Michael", score: 45),
-		ScoreItem(title: "Spiel 1", player: "Ines", score: 32),
-		ScoreItem(title: "Spiel 3", player: "Michael", score: 45)
-	]
+	let viewModel = ScoresViewModel()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -39,7 +29,7 @@ extension ScoresViewController {
 	}
 
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return scoreItems.count
+		return self.viewModel.scoreItemCount
 	}
 }
 
@@ -62,8 +52,9 @@ extension ScoresViewController {
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
 		let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath)
-		let menuItem = scoreItems[indexPath.row]
-		cell.textLabel?.text = "\(menuItem.title) - \(menuItem.player) - \(menuItem.score)"
+		if let scoreItem = self.viewModel.scoreItem(at: indexPath.row) {
+			cell.textLabel?.text = "\(scoreItem.title) - \(scoreItem.player) - \(scoreItem.score)"
+		}
 
 		return cell
 	}
@@ -76,9 +67,5 @@ extension ScoresViewController {
 		}*/
 
 		tableView.deselectRow(at: indexPath, animated: true)
-	}
-
-	override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-		return nil
 	}
 }

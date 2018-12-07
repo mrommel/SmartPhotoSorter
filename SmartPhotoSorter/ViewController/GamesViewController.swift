@@ -102,10 +102,6 @@ extension GamesViewController {
 			destination?.viewModel = self.viewModel?.createGameViewModel()
 		}
 	}
-
-	override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-		return nil
-	}
 }
 
 extension GamesViewController: UIPickerViewDelegate {

@@ -83,9 +83,4 @@ extension MainController {
 	override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
 		return 180
 	}
-
-	override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-		return nil
-	}
 }
-

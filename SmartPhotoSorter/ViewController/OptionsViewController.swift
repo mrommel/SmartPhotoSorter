@@ -78,8 +78,4 @@ extension OptionsViewController {
 
 		tableView.deselectRow(at: indexPath, animated: true)
 	}
-
-	override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-		return nil
-	}
 }

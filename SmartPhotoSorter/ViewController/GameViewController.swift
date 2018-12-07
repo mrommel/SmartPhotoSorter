@@ -22,6 +22,7 @@ class GameViewController: BaseViewController {
 	var viewModel: GameViewModel? = nil
 
 	var images = [SKPhotoProtocol]()
+	var order = [Int]()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -113,10 +114,24 @@ extension GameViewController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
 
 		// current game swap images
-		self.images.swapAt(sourceIndexPath.row, destinationIndexPath.row)
+		let fromIndex = sourceIndexPath.row
+		let toIndex = destinationIndexPath.row
 
-		// inform view model
-		//self.viewModel
+		if fromIndex < toIndex {
+			for index in fromIndex..<toIndex {
+				self.images.swapAt(index, index + 1)
+				self.order.swapAt(index, index + 1)
+			}
+		} else {
+			for index in (toIndex..<fromIndex).reversed() {
+				self.images.swapAt(index, index + 1)
+				self.order.swapAt(index, index + 1)
+			}
+		}
+
+		let scoreCalculator = ScoreCalculator()
+		let score = scoreCalculator.calculateScore(of: self.order)
+		print("score: \(score)")
 
 		self.collectionView.reloadData()
 	}
@@ -164,7 +179,8 @@ extension GameViewController: SKPhotoBrowserDelegate {
 private extension GameViewController {
 
 	func setupPhotoData() {
-		self.images = createLocalPhotos()
+		self.images = self.viewModel?.createLocalPhotos() ?? []
+		self.order = self.viewModel?.createLocalOrder() ?? []
 	}
 
 	func setupCollectionView() {
@@ -173,17 +189,6 @@ private extension GameViewController {
 
 		self.longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongGesture(gesture:)))
 		collectionView.addGestureRecognizer(longPressGesture)
-	}
-
-	func createLocalPhotos() -> [SKPhotoProtocol] {
-
-		let amountOfImages = self.viewModel?.amountOfImages() ?? 0
-
-		return (0..<amountOfImages).map { (i: Int) -> SKPhotoProtocol in
-			let photo = SKPhoto.photoWithImage(UIImage(named: "image\(i%10)")!)
-			photo.caption = R.string.localizable.gameDetailCaption()
-			return photo
-		}
 	}
 
 	@objc func handleLongGesture(gesture: UILongPressGestureRecognizer) {
@@ -201,27 +206,5 @@ private extension GameViewController {
 		default:
 			collectionView.cancelInteractiveMovement()
 		}
-	}
-}
-
-extension GameViewController {
-
-
-}
-
-class PhotoCollectionViewCell: UICollectionViewCell {
-
-	@IBOutlet weak var photoImageView: UIImageView!
-
-	override func awakeFromNib() {
-		super.awakeFromNib()
-
-		self.photoImageView.image = nil
-		layer.cornerRadius = 25.0
-		layer.masksToBounds = true
-	}
-
-	override func prepareForReuse() {
-		self.photoImageView.image = nil
 	}
 }

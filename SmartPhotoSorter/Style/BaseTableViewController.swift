@@ -57,4 +57,8 @@ class BaseTableViewController : UITableViewController, ThemeAware {
 		cell.detailTextLabel?.textColor = theme.subtitleTextColor
 		cell.backgroundColor = theme.backgroundColor
 	}
+
+	override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+		return UIView()
+	}
 }

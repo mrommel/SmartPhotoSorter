@@ -29,5 +29,8 @@
 "Game.Finish.Done" = "Done";
 "Game.Finish.Cancel" = "Cancel";
 
+/*** ScoresViewController ***/
+"Scores.Error.NoPlayer" = "No player name";
+
 /*** OptionsViewController ***/
 "Options.Title" = "Options";

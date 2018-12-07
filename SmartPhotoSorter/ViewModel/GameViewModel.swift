@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SKPhotoBrowser
 
 class GameViewModel {
 
@@ -22,5 +23,25 @@ class GameViewModel {
 
 	func score() -> Int {
 		return 10
+	}
+
+	func createLocalPhotos() -> [SKPhotoProtocol] {
+
+		let amountOfImages = self.amountOfImages()
+
+		return (0..<amountOfImages).map { (i: Int) -> SKPhotoProtocol in
+			let photo = SKPhoto.photoWithImage(UIImage(named: "image\(i%10)")!)
+			photo.caption = R.string.localizable.gameDetailCaption()
+			return photo
+		}
+	}
+
+	func createLocalOrder() -> [Int] {
+
+		let amountOfImages = self.amountOfImages()
+
+		return (0..<amountOfImages).map{ (i: Int) -> Int in
+			return i
+		}
 	}
 }

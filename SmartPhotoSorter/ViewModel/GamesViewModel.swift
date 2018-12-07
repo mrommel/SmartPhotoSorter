@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Rswift
 
 struct GamesItem {
 
@@ -35,13 +36,13 @@ class GamesViewModel: NSObject {
 
 		if let games = provider.games() {
 			for game in games {
-				self.gameItems.append(GamesItem(title: game.name ?? "No game title"))
+				self.gameItems.append(GamesItem(title: game.name ?? R.string.localizable.gamesErrorNoGame()))
 			}
 		}
 
 		if let players = provider.players() {
 			for player in players {
-				self.playerItems.append(PlayerItem(name: player.name ?? "No player name"))
+				self.playerItems.append(PlayerItem(name: player.name ?? R.string.localizable.scoresErrorNoPlayer()))
 			}
 		}
 	}
