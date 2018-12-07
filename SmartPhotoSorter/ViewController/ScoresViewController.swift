@@ -15,7 +15,7 @@ struct ScoreItem {
 	let score: Int
 }
 
-class ScoresViewController: UITableViewController {
+class ScoresViewController: BaseTableViewController {
 
 	let scoreItems: [ScoreItem] = [
 		ScoreItem(title: "Spiel 1", player: "Michael", score: 45),
@@ -23,12 +23,8 @@ class ScoresViewController: UITableViewController {
 		ScoreItem(title: "Spiel 3", player: "Michael", score: 45)
 	]
 
-	let theme = ThemeManager.currentTheme()
-
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
-		self.view.backgroundColor = theme.backgroundColor
 
 		self.title = "Scores"
 	}
@@ -78,6 +74,8 @@ extension ScoresViewController {
 		/*if let segue = scoreItems.segue {
 			self.performSegue(withIdentifier: segue, sender: self)
 		}*/
+
+		tableView.deselectRow(at: indexPath, animated: true)
 	}
 
 	override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

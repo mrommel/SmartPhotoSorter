@@ -9,18 +9,16 @@
 import UIKit
 import Rswift
 
-class OptionsViewController: UITableViewController {
+class OptionsViewController: BaseTableViewController {
 
 	let viewModel: OptionsViewModel = OptionsViewModel()
-	let theme = ThemeManager.currentTheme()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		self.view.backgroundColor = theme.backgroundColor
-
-		self.title = "Options"
+		self.title = R.string.localizable.optionsTitle()
 	}
+
 }
 
 // MARK: UITableViewDataSource
@@ -72,9 +70,13 @@ extension OptionsViewController {
 			self.viewModel.initData()
 		case .reset:
 			self.viewModel.resetData()
+		case .light:
+			self.viewModel.switchLight()
+		case .dark:
+			self.viewModel.switchDark()
 		}
 
-		self.dese
+		tableView.deselectRow(at: indexPath, animated: true)
 	}
 
 	override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

@@ -12,6 +12,8 @@ import Rswift
 enum OptionsType {
 	case populate
 	case reset
+	case light
+	case dark
 }
 
 struct OptionsItem {
@@ -27,6 +29,8 @@ class OptionsViewModel {
 	init() {
 		self.optionsItems.append(OptionsItem(title: "Populate", image: R.image.populate()!, identifier: .populate))
 		self.optionsItems.append(OptionsItem(title: "Reset", image: R.image.trash()!, identifier: .reset))
+		self.optionsItems.append(OptionsItem(title: "Light", image: R.image.light()!, identifier: .light))
+		self.optionsItems.append(OptionsItem(title: "Dark", image: R.image.dark()!, identifier: .dark))
 	}
 
 	func item(at index: Int) -> OptionsItem {
@@ -43,5 +47,15 @@ class OptionsViewModel {
 
 		let provider = GameProvider()
 		provider.initData()
+	}
+
+	func switchDark() {
+
+		ThemeManager.applyTheme(theme: .dark)
+	}
+
+	func switchLight() {
+
+		ThemeManager.applyTheme(theme: .light)
 	}
 }

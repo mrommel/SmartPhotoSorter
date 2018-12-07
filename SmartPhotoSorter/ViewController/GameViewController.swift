@@ -14,7 +14,7 @@ private enum Constants {
 	static let photoCollectionViewCell = "photoCollectionViewCell"
 }
 
-class GameViewController: UIViewController {
+class GameViewController: BaseViewController {
 
 	@IBOutlet weak var collectionView: UICollectionView!
 	fileprivate var longPressGesture: UILongPressGestureRecognizer!
@@ -22,7 +22,6 @@ class GameViewController: UIViewController {
 	var viewModel: GameViewModel? = nil
 
 	var images = [SKPhotoProtocol]()
-	let theme = ThemeManager.currentTheme()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -35,8 +34,6 @@ class GameViewController: UIViewController {
 
 		self.setupPhotoData()
 		self.setupCollectionView()
-
-		self.view.backgroundColor = theme.backgroundColor
 
 		self.title = viewModel?.name ?? R.string.localizable.gameTitleNoGame()
 	}
@@ -109,9 +106,9 @@ extension GameViewController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
 
 		// current game swap images
-		let img = images[sourceIndexPath.item]
-		images[sourceIndexPath.item] = images[destinationIndexPath.item]
-		images[destinationIndexPath.item] = img
+		let img = self.images[sourceIndexPath.item]
+		self.images[sourceIndexPath.item] = self.images[destinationIndexPath.item]
+		self.images[destinationIndexPath.item] = img
 
 		// inform view model
 		//self.viewModel

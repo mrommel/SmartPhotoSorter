@@ -21,7 +21,7 @@ private enum Constants {
 	static let showOptions = "showOptions"
 }
 
-class MainController: UITableViewController {
+class MainController: BaseTableViewController {
 
 	let menuItems: [MenuItem] = [
 		MenuItem(title: R.string.localizable.mainMenuGames(), image: R.image.rocket(), segue: Constants.showGames),
@@ -29,12 +29,8 @@ class MainController: UITableViewController {
 		MenuItem(title: R.string.localizable.mainMenuOptions(), image: R.image.options(), segue: Constants.showOptions)
 	]
 
-	let theme = ThemeManager.currentTheme()
-
 	override func viewDidLoad() {
 		super.viewDidLoad()
-
-		self.view.backgroundColor = theme.backgroundColor
 
 		self.title = R.string.localizable.mainTitle() 
 	}

@@ -39,9 +39,9 @@ enum Theme: Int {
 	var mainColor: UIColor {
 		switch self {
 		case .light:
-			return UIColor().colorFromHexString("ffffff")
+			return UIColor().colorFromHexString("#8DBA77")
 		case .dark:
-			return UIColor().colorFromHexString("000000")
+			return UIColor().colorFromHexString("#E35740")
 		}
 	}
 
@@ -72,30 +72,34 @@ enum Theme: Int {
 		}
 	}
 
-	var secondaryColor: UIColor {
-		switch self {
-		case .light:
-			return UIColor().colorFromHexString("ffffff")
-		case .dark:
-			return UIColor().colorFromHexString("000000")
-		}
-	}
-
 	var titleTextColor: UIColor {
 		switch self {
 		case .light:
-			return UIColor().colorFromHexString("ffffff")
-		case .dark:
 			return UIColor().colorFromHexString("000000")
+		case .dark:
+			return UIColor().colorFromHexString("ffffff")
 		}
 	}
+
 	var subtitleTextColor: UIColor {
 		switch self {
 		case .light:
-			return UIColor().colorFromHexString("ffffff")
-		case .dark:
 			return UIColor().colorFromHexString("000000")
+		case .dark:
+			return UIColor().colorFromHexString("ffffff")
 		}
+	}
+}
+
+protocol ThemeAware: class {
+
+	var identifier: String { get set }
+	func handleThemeChanged()
+}
+
+extension ThemeAware {
+	static func ==(lhs: Self, rhs: Self) -> Bool {
+		return lhs.identifier == rhs.identifier
 	}
 }
 
@@ -104,6 +108,19 @@ let SelectedThemeKey = "SelectedTheme"
 
 // This will let you use a theme in the app.
 class ThemeManager {
+
+	private static var awareViewControllers: [ThemeAware] = []
+
+	static func add(awareViewcontroller: ThemeAware) {
+		awareViewControllers.append(awareViewcontroller)
+	}
+
+	static func remove(awareViewcontroller: ThemeAware) {
+
+		if let index = awareViewControllers.index(where: { $0.identifier == awareViewcontroller.identifier }) {
+			awareViewControllers.remove(at: index)
+		}
+	}
 
 	// ThemeManager
 	static func currentTheme() -> Theme {
@@ -159,5 +176,12 @@ class ThemeManager {
 
 		UISwitch.appearance().onTintColor = theme.mainColor.withAlphaComponent(0.3)
 		UISwitch.appearance().thumbTintColor = theme.mainColor
+
+		// notify theme aware view contrller
+		for awareViewController in awareViewControllers {
+			awareViewController.handleThemeChanged()
+		}
 	}
 }
+
+

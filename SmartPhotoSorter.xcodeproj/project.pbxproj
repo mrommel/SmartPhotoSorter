@@ -33,6 +33,8 @@
 		0467EAFB21BA8A34009B9B78 /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467EAFA21BA8A34009B9B78 /* OptionsViewController.swift */; };
 		0467EAFD21BA9999009B9B78 /* OptionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467EAFC21BA9999009B9B78 /* OptionsViewModel.swift */; };
 		0467EB0021BAAE3D009B9B78 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467EAFF21BAAE3D009B9B78 /* ThemeManager.swift */; };
+		0467EB0221BAD9F2009B9B78 /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467EB0121BAD9F2009B9B78 /* BaseTableViewController.swift */; };
+		0467EB0421BAE125009B9B78 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467EB0321BAE125009B9B78 /* BaseViewController.swift */; };
 		4C44DA933C7BB50AEC0BFE09 /* Pods_SmartPhotoSorter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34612EFC80932ACCCEB9D72F /* Pods_SmartPhotoSorter.framework */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +67,8 @@
 		0467EAFA21BA8A34009B9B78 /* OptionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
 		0467EAFC21BA9999009B9B78 /* OptionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsViewModel.swift; sourceTree = "<group>"; };
 		0467EAFF21BAAE3D009B9B78 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		0467EB0121BAD9F2009B9B78 /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
+		0467EB0321BAE125009B9B78 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		34612EFC80932ACCCEB9D72F /* Pods_SmartPhotoSorter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartPhotoSorter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		936658439A35F1AA9D651967 /* Pods-SmartPhotoSorter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartPhotoSorter.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartPhotoSorter/Pods-SmartPhotoSorter.release.xcconfig"; sourceTree = "<group>"; };
 		B81A5B679A8B32BDDA3EC8AB /* Pods-SmartPhotoSorter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartPhotoSorter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartPhotoSorter/Pods-SmartPhotoSorter.debug.xcconfig"; sourceTree = "<group>"; };
@@ -178,6 +182,8 @@
 			isa = PBXGroup;
 			children = (
 				0467EAFF21BAAE3D009B9B78 /* ThemeManager.swift */,
+				0467EB0121BAD9F2009B9B78 /* BaseTableViewController.swift */,
+				0467EB0321BAE125009B9B78 /* BaseViewController.swift */,
 			);
 			path = Style;
 			sourceTree = "<group>";
@@ -345,6 +351,7 @@
 				044DB9DF21B95E04000B14DA /* Score+CoreDataClass.swift in Sources */,
 				044DB9E321B95E04000B14DA /* Game+CoreDataClass.swift in Sources */,
 				044DB9DD21B95E04000B14DA /* Photo+CoreDataClass.swift in Sources */,
+				0467EB0421BAE125009B9B78 /* BaseViewController.swift in Sources */,
 				044DB9AA21B8068F000B14DA /* GameViewController.swift in Sources */,
 				0458729F21B7C8D2001B43A8 /* MainController.swift in Sources */,
 				0458728221B7B686001B43A8 /* AppDelegate.swift in Sources */,
@@ -362,6 +369,7 @@
 				0467EAFD21BA9999009B9B78 /* OptionsViewModel.swift in Sources */,
 				044DB9E121B95E04000B14DA /* Player+CoreDataClass.swift in Sources */,
 				044DB9B321B94F8D000B14DA /* GameProvider.swift in Sources */,
+				0467EB0221BAD9F2009B9B78 /* BaseTableViewController.swift in Sources */,
 				0467EB0021BAAE3D009B9B78 /* ThemeManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
