@@ -56,6 +56,7 @@ extension GamesViewController {
 
 		// store selected game in view model
 		self.viewModel?.selectGameItem(at: indexPath.row)
+		self.viewModel?.selectPlayerItem(at: 0) // init with first player, if user does not change
 
 		let vc = UIViewController()
 		vc.preferredContentSize = CGSize(width: 250,height: 300)
