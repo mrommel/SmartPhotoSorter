@@ -11,17 +11,18 @@ import Foundation
 
 extension UIColor {
 	func colorFromHexString (_ hex:String) -> UIColor {
-		var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+
+		var cString: String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
 
 		if (cString.hasPrefix("#")) {
 			cString.remove(at: cString.startIndex)
 		}
 
-		if ((cString.characters.count) != 6) {
+		if (cString.count != 6) {
 			return UIColor.gray
 		}
 
-		var rgbValue:UInt32 = 0
+		var rgbValue: UInt32 = 0
 		Scanner(string: cString).scanHexInt32(&rgbValue)
 
 		return UIColor(
@@ -32,6 +33,7 @@ extension UIColor {
 		)
 	}
 }
+
 enum Theme: Int {
 
 	case light, dark
@@ -66,27 +68,27 @@ enum Theme: Int {
 	var backgroundColor: UIColor {
 		switch self {
 		case .light:
-			return UIColor().colorFromHexString("ffffff")
+			return UIColor().colorFromHexString("#ffffff")
 		case .dark:
-			return UIColor().colorFromHexString("000000")
+			return UIColor().colorFromHexString("#000000")
 		}
 	}
 
 	var titleTextColor: UIColor {
 		switch self {
 		case .light:
-			return UIColor().colorFromHexString("000000")
+			return UIColor().colorFromHexString("#000000")
 		case .dark:
-			return UIColor().colorFromHexString("ffffff")
+			return UIColor().colorFromHexString("#ffffff")
 		}
 	}
 
 	var subtitleTextColor: UIColor {
 		switch self {
 		case .light:
-			return UIColor().colorFromHexString("000000")
+			return UIColor().colorFromHexString("#000000")
 		case .dark:
-			return UIColor().colorFromHexString("ffffff")
+			return UIColor().colorFromHexString("#ffffff")
 		}
 	}
 }
@@ -95,12 +97,6 @@ protocol ThemeAware: class {
 
 	var identifier: String { get set }
 	func handleThemeChanged()
-}
-
-extension ThemeAware {
-	static func ==(lhs: Self, rhs: Self) -> Bool {
-		return lhs.identifier == rhs.identifier
-	}
 }
 
 // Enum declaration
@@ -177,7 +173,7 @@ class ThemeManager {
 		UISwitch.appearance().onTintColor = theme.mainColor.withAlphaComponent(0.3)
 		UISwitch.appearance().thumbTintColor = theme.mainColor
 
-		// notify theme aware view contrller
+		// notify theme aware view controllers
 		for awareViewController in awareViewControllers {
 			awareViewController.handleThemeChanged()
 		}
