@@ -33,11 +33,12 @@ class BaseViewController: UIViewController, ThemeAware {
 
 	// MARK: - Theme
 
-	func handleThemeChanged() {
+	@objc func handleThemeChanged() {
 
 		let theme = ThemeManager.currentTheme()
 
 		self.view.backgroundColor = theme.backgroundColor
 		self.navigationController?.navigationBar.barStyle = theme.barStyle
+		self.navigationController?.view.backgroundColor = theme.backgroundColor
 	}
 }

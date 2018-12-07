@@ -58,6 +58,13 @@ class GameViewController: BaseViewController {
 		alert.addAction(UIAlertAction(title: R.string.localizable.gameFinishCancel(), style: .cancel, handler: nil))
 		self.present(alert, animated: true)
 	}
+
+	override func handleThemeChanged() {
+		super.handleThemeChanged()
+
+		let theme = ThemeManager.currentTheme()
+		self.collectionView.backgroundColor = theme.backgroundColor
+	}
 }
 
 // MARK: - UICollectionViewDataSource
@@ -72,8 +79,8 @@ extension GameViewController: UICollectionViewDataSource {
 			return UICollectionViewCell()
 		}
 
-		cell.photoImageView.image = self.images[(indexPath as NSIndexPath).row].underlyingImage
-		cell.photoImageView.contentMode = .scaleAspectFit
+		cell.photoImageView.image = self.images[indexPath.row].underlyingImage
+		cell.photoImageView.contentMode = .scaleAspectFill
 		
 		return cell
 	}
@@ -83,7 +90,7 @@ extension GameViewController: UICollectionViewDataSource {
 extension GameViewController: UICollectionViewDelegate {
 
 	@objc(collectionView:didSelectItemAtIndexPath:) func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		let browser = SKPhotoBrowser(photos: images, initialPageIndex: indexPath.row)
+		let browser = SKPhotoBrowser(photos: self.images, initialPageIndex: indexPath.row)
 
 		browser.delegate = self
 
@@ -106,9 +113,7 @@ extension GameViewController: UICollectionViewDelegate {
 	func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
 
 		// current game swap images
-		let img = self.images[sourceIndexPath.item]
-		self.images[sourceIndexPath.item] = self.images[destinationIndexPath.item]
-		self.images[destinationIndexPath.item] = img
+		self.images.swapAt(sourceIndexPath.row, destinationIndexPath.row)
 
 		// inform view model
 		//self.viewModel
@@ -159,7 +164,7 @@ extension GameViewController: SKPhotoBrowserDelegate {
 private extension GameViewController {
 
 	func setupPhotoData() {
-		images = createLocalPhotos()
+		self.images = createLocalPhotos()
 	}
 
 	func setupCollectionView() {
@@ -197,6 +202,11 @@ private extension GameViewController {
 			collectionView.cancelInteractiveMovement()
 		}
 	}
+}
+
+extension GameViewController {
+
+
 }
 
 class PhotoCollectionViewCell: UICollectionViewCell {
