@@ -65,16 +65,7 @@ extension OptionsViewController {
 
 		let optionItem = self.viewModel.item(at: indexPath.row)
 
-		switch(optionItem.identifier) {
-		case .populate:
-			self.viewModel.initData()
-		case .reset:
-			self.viewModel.resetData()
-		case .light:
-			self.viewModel.switchLight()
-		case .dark:
-			self.viewModel.switchDark()
-		}
+		self.viewModel.handle(identifier: optionItem.identifier)
 
 		tableView.deselectRow(at: indexPath, animated: true)
 	}

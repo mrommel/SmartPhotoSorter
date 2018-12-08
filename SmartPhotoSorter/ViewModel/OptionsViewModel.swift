@@ -27,34 +27,48 @@ class OptionsViewModel {
 	var optionsItems: [OptionsItem] = []
 
 	init() {
-		self.optionsItems.append(OptionsItem(title: "Populate", image: R.image.populate()!, identifier: .populate))
-		self.optionsItems.append(OptionsItem(title: "Reset", image: R.image.trash()!, identifier: .reset))
-		self.optionsItems.append(OptionsItem(title: "Light", image: R.image.light()!, identifier: .light))
-		self.optionsItems.append(OptionsItem(title: "Dark", image: R.image.dark()!, identifier: .dark))
+		self.optionsItems.append(OptionsItem(title: R.string.localizable.optionsItemPopulate(), image: R.image.populate()!, identifier: .populate))
+		self.optionsItems.append(OptionsItem(title: R.string.localizable.optionsItemReset(), image: R.image.trash()!, identifier: .reset))
+		self.optionsItems.append(OptionsItem(title: R.string.localizable.optionsItemLight(), image: R.image.light()!, identifier: .light))
+		self.optionsItems.append(OptionsItem(title: R.string.localizable.optionsItemDark(), image: R.image.dark()!, identifier: .dark))
 	}
 
 	func item(at index: Int) -> OptionsItem {
 		return self.optionsItems[index]
 	}
 
-	func resetData() {
+	func handle(identifier: OptionsType) {
+
+		switch(identifier) {
+		case .populate:
+			self.initData()
+		case .reset:
+			self.resetData()
+		case .light:
+			self.switchLight()
+		case .dark:
+			self.switchDark()
+		}
+	}
+
+	private func resetData() {
 
 		let provider = GameProvider()
 		provider.reset()
 	}
 
-	func initData() {
+	private func initData() {
 
 		let provider = GameProvider()
 		provider.initData()
 	}
 
-	func switchDark() {
+	private func switchDark() {
 
 		ThemeManager.applyTheme(theme: .dark)
 	}
 
-	func switchLight() {
+	private func switchLight() {
 
 		ThemeManager.applyTheme(theme: .light)
 	}

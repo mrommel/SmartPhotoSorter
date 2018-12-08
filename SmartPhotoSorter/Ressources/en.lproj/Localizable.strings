@@ -34,3 +34,7 @@
 
 /*** OptionsViewController ***/
 "Options.Title" = "Options";
+"Options.Item.Populate" = "Populate";
+"Options.Item.Reset" = "Reset";
+"Options.Item.Light" = "Light";
+"Options.Item.Dark" = "Dark";
