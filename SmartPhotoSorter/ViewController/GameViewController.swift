@@ -69,7 +69,7 @@ extension GameViewController: UICollectionViewDataSource {
 		return self.viewModel?.amountOfImages() ?? 0
 	}
 
-	@objc(collectionView:cellForItemAtIndexPath:) func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+	@objc(collectionView: cellForItemAtIndexPath:) func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
 		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.photoCollectionViewCell, for: indexPath) as? PhotoCollectionViewCell else {
 			return UICollectionViewCell()
@@ -77,7 +77,7 @@ extension GameViewController: UICollectionViewDataSource {
 
 		cell.photoImageView.image = self.viewModel?.image(at: indexPath.row)
 		cell.photoImageView.contentMode = .scaleAspectFill
-		
+
 		return cell
 	}
 }
@@ -85,13 +85,13 @@ extension GameViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 extension GameViewController: UICollectionViewDelegate {
 
-	@objc(collectionView:didSelectItemAtIndexPath:) func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+	@objc(collectionView: didSelectItemAtIndexPath:) func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
 		let browser = SKPhotoBrowser(photos: self.viewModel?.allPhotos ?? [], initialPageIndex: indexPath.row)
 
 		browser.delegate = self
 
-		present(browser, animated: true, completion: {})
+		present(browser, animated: true, completion: { })
 	}
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
@@ -136,12 +136,12 @@ extension GameViewController: UICollectionViewDelegate {
 extension GameViewController: SKPhotoBrowserDelegate {
 
 	func didShowPhotoAtIndex(_ index: Int) {
-		self.collectionView.visibleCells.forEach({$0.isHidden = false})
+		self.collectionView.visibleCells.forEach({ $0.isHidden = false })
 		self.collectionView.cellForItem(at: IndexPath(item: index, section: 0))?.isHidden = true
 	}
 
 	func willDismissAtPageIndex(_ index: Int) {
-		self.collectionView.visibleCells.forEach({$0.isHidden = false})
+		self.collectionView.visibleCells.forEach({ $0.isHidden = false })
 		self.collectionView.cellForItem(at: IndexPath(item: index, section: 0))?.isHidden = true
 	}
 

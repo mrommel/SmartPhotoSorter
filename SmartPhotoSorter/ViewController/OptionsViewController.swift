@@ -16,6 +16,9 @@ class OptionsViewController: BaseTableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
+		self.tableView.register(OptionsHeader.self, forHeaderFooterViewReuseIdentifier: OptionsHeader.reuseIdentifer)
+		self.tableView.register(OptionsSectionHeader.self, forHeaderFooterViewReuseIdentifier: OptionsSectionHeader.reuseIdentifer)
+
 		self.title = R.string.localizable.optionsTitle()
 	}
 
@@ -26,11 +29,11 @@ class OptionsViewController: BaseTableViewController {
 extension OptionsViewController {
 
 	override func numberOfSections(in tableView: UITableView) -> Int {
-		return 1
+		return self.viewModel.sectionCount
 	}
 
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return self.viewModel.optionsItems.count
+		return self.viewModel.rowsIn(section: section)
 	}
 }
 
@@ -40,20 +43,41 @@ extension OptionsViewController {
 
 	override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
-		let headerImage: UIImage = R.image.options()!
-		let headerView = UIImageView(image: headerImage)
-		headerView.contentMode = .scaleAspectFit
-		return headerView
+		let title = self.viewModel.sectionTitle(at: section)
+
+		if section == 0 {
+			guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: OptionsHeader.reuseIdentifer) as? OptionsHeader else {
+				return nil
+			}
+
+			header.label.text = title
+			header.imageView.image = R.image.options()
+
+			return header
+		} else {
+			guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: OptionsSectionHeader.reuseIdentifer) as? OptionsSectionHeader else {
+				return nil
+			}
+
+			header.label.text = title
+
+			return header
+		}
 	}
 
 	override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		return 180
+
+		if section == 0 {
+			return 180 + 52
+		} else {
+			return 52
+		}
 	}
 
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
 		let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath)
-		let optionItem = self.viewModel.item(at: indexPath.row)
+		let optionItem = self.viewModel.item(at: indexPath)
 
 		cell.imageView?.image = optionItem.image
 		cell.textLabel?.text = optionItem.title
@@ -63,7 +87,7 @@ extension OptionsViewController {
 
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-		let optionItem = self.viewModel.item(at: indexPath.row)
+		let optionItem = self.viewModel.item(at: indexPath)
 
 		self.viewModel.handle(identifier: optionItem.identifier)
 

@@ -22,19 +22,57 @@ struct OptionsItem {
 	let identifier: OptionsType
 }
 
+class OptionsSection {
+
+	let title: String
+	var items: [OptionsItem] = []
+
+	init(title: String) {
+
+		self.title = title
+	}
+}
+
 class OptionsViewModel {
 
-	var optionsItems: [OptionsItem] = []
+	var optionsSections: [OptionsSection] = []
 
 	init() {
-		self.optionsItems.append(OptionsItem(title: R.string.localizable.optionsItemPopulate(), image: R.image.populate()!, identifier: .populate))
-		self.optionsItems.append(OptionsItem(title: R.string.localizable.optionsItemReset(), image: R.image.trash()!, identifier: .reset))
-		self.optionsItems.append(OptionsItem(title: R.string.localizable.optionsItemLight(), image: R.image.light()!, identifier: .light))
-		self.optionsItems.append(OptionsItem(title: R.string.localizable.optionsItemDark(), image: R.image.dark()!, identifier: .dark))
+
+		let sectionData = OptionsSection(title: "Data")
+		sectionData.items.append(OptionsItem(title: R.string.localizable.optionsItemPopulate(), image: R.image.populate()!, identifier: .populate))
+		sectionData.items.append(OptionsItem(title: R.string.localizable.optionsItemReset(), image: R.image.trash()!, identifier: .reset))
+		self.optionsSections.append(sectionData)
+
+		let sectionTheme = OptionsSection(title: "Theme")
+		sectionTheme.items.append(OptionsItem(title: R.string.localizable.optionsItemLight(), image: R.image.light()!, identifier: .light))
+		sectionTheme.items.append(OptionsItem(title: R.string.localizable.optionsItemDark(), image: R.image.dark()!, identifier: .dark))
+		self.optionsSections.append(sectionTheme)
 	}
 
-	func item(at index: Int) -> OptionsItem {
-		return self.optionsItems[index]
+	var sectionCount: Int {
+		return self.optionsSections.count
+	}
+
+	func sectionTitle(at index: Int) -> String {
+
+		let section = self.optionsSections[index]
+
+		return section.title
+	}
+
+	func rowsIn(section: Int) -> Int {
+
+		let section = self.optionsSections[section]
+
+		return section.items.count
+	}
+
+	func item(at indexPath: IndexPath) -> OptionsItem {
+
+		let section = self.optionsSections[indexPath.section]
+
+		return section.items[indexPath.row]
 	}
 
 	func handle(identifier: OptionsType) {

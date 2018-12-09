@@ -42,6 +42,10 @@
 		0467EB0F21BB0F8B009B9B78 /* ScoresViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467EB0E21BB0F8B009B9B78 /* ScoresViewModel.swift */; };
 		0467EB1221BB1A17009B9B78 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0467EB1121BB1A17009B9B78 /* PhotoCollectionViewCell.swift */; };
 		046BAF6921BC5F5B00977071 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BAF6821BC5F5B00977071 /* MainViewModel.swift */; };
+		046BAF6B21BD44E300977071 /* ThemeAwareLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BAF6A21BD44E300977071 /* ThemeAwareLabel.swift */; };
+		046BAF6D21BD467300977071 /* OptionsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BAF6C21BD467300977071 /* OptionsHeader.swift */; };
+		046BAF6F21BD48F700977071 /* OptionsSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BAF6E21BD48F700977071 /* OptionsSectionHeader.swift */; };
+		046BAF7121BD493400977071 /* ThemeAwareHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BAF7021BD493400977071 /* ThemeAwareHeaderFooterView.swift */; };
 		4C44DA933C7BB50AEC0BFE09 /* Pods_SmartPhotoSorter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34612EFC80932ACCCEB9D72F /* Pods_SmartPhotoSorter.framework */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +87,10 @@
 		0467EB0E21BB0F8B009B9B78 /* ScoresViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoresViewModel.swift; sourceTree = "<group>"; };
 		0467EB1121BB1A17009B9B78 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		046BAF6821BC5F5B00977071 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		046BAF6A21BD44E300977071 /* ThemeAwareLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeAwareLabel.swift; sourceTree = "<group>"; };
+		046BAF6C21BD467300977071 /* OptionsHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsHeader.swift; sourceTree = "<group>"; };
+		046BAF6E21BD48F700977071 /* OptionsSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsSectionHeader.swift; sourceTree = "<group>"; };
+		046BAF7021BD493400977071 /* ThemeAwareHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeAwareHeaderFooterView.swift; sourceTree = "<group>"; };
 		34612EFC80932ACCCEB9D72F /* Pods_SmartPhotoSorter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartPhotoSorter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		936658439A35F1AA9D651967 /* Pods-SmartPhotoSorter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartPhotoSorter.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartPhotoSorter/Pods-SmartPhotoSorter.release.xcconfig"; sourceTree = "<group>"; };
 		B81A5B679A8B32BDDA3EC8AB /* Pods-SmartPhotoSorter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartPhotoSorter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartPhotoSorter/Pods-SmartPhotoSorter.debug.xcconfig"; sourceTree = "<group>"; };
@@ -221,6 +229,10 @@
 			isa = PBXGroup;
 			children = (
 				0467EB1121BB1A17009B9B78 /* PhotoCollectionViewCell.swift */,
+				046BAF6A21BD44E300977071 /* ThemeAwareLabel.swift */,
+				046BAF6C21BD467300977071 /* OptionsHeader.swift */,
+				046BAF6E21BD48F700977071 /* OptionsSectionHeader.swift */,
+				046BAF7021BD493400977071 /* ThemeAwareHeaderFooterView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -386,10 +398,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0467EB0D21BB0F02009B9B78 /* Theme.swift in Sources */,
+				046BAF6B21BD44E300977071 /* ThemeAwareLabel.swift in Sources */,
 				044DB9DF21B95E04000B14DA /* Score+CoreDataClass.swift in Sources */,
+				046BAF6D21BD467300977071 /* OptionsHeader.swift in Sources */,
 				044DB9E321B95E04000B14DA /* Game+CoreDataClass.swift in Sources */,
 				044DB9DD21B95E04000B14DA /* Photo+CoreDataClass.swift in Sources */,
 				0467EB0421BAE125009B9B78 /* BaseViewController.swift in Sources */,
+				046BAF6F21BD48F700977071 /* OptionsSectionHeader.swift in Sources */,
+				046BAF7121BD493400977071 /* ThemeAwareHeaderFooterView.swift in Sources */,
 				046BAF6921BC5F5B00977071 /* MainViewModel.swift in Sources */,
 				044DB9AA21B8068F000B14DA /* GameViewController.swift in Sources */,
 				0458729F21B7C8D2001B43A8 /* MainController.swift in Sources */,

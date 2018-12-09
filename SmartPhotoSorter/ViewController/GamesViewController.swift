@@ -75,7 +75,7 @@ extension GamesViewController {
 		self.viewModel?.selectPlayerItem(at: 0) // init with first player, if user does not change
 
 		let vc = UIViewController()
-		vc.preferredContentSize = CGSize(width: 250,height: 300)
+		vc.preferredContentSize = CGSize(width: 250, height: 300)
 		let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 250, height: 300))
 		pickerView.delegate = self
 		pickerView.dataSource = self.viewModel!

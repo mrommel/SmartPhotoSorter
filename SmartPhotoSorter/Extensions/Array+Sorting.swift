@@ -15,8 +15,8 @@ extension Array where Element: Comparable {
 		var data = self
 		var numberOfSwaps = 0
 
-		for i in 0..<(data.count-1) { // 1
-			for j in 0..<(data.count-i-1) where areInIncreasingOrder(data[j+1], data[j]) { // 2
+		for i in 0..<(data.count - 1) { // 1
+			for j in 0..<(data.count - i - 1) where areInIncreasingOrder(data[j + 1], data[j]) { // 2
 				data.swapAt(j, j + 1)
 				numberOfSwaps = numberOfSwaps + 1
 			}
