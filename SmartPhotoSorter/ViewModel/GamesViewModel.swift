@@ -33,16 +33,17 @@ class GamesViewModel: NSObject {
 	var gameOption: GameOption = GameOption()
 
 	override init() {
+		super.init()
+
+		self.populateGames()
+		self.populatePlayers()
+	}
+
+	func populateGames() {
 
 		if let games = provider.games() {
 			for game in games {
 				self.gameItems.append(GamesItem(title: game.name ?? R.string.localizable.gamesErrorNoGame()))
-			}
-		}
-
-		if let players = provider.players() {
-			for player in players {
-				self.playerItems.append(PlayerItem(name: player.name ?? R.string.localizable.scoresErrorNoPlayer()))
 			}
 		}
 	}
@@ -59,28 +60,21 @@ class GamesViewModel: NSObject {
 		self.gameOption.gameSelection = index
 	}
 
-	func selectPlayerItem(at index: Int) {
-		self.gameOption.playerSelection = index
-	}
-
 	func createGameViewModel() -> GameViewModel? {
 
-		let game = provider.gameBy(index: self.gameOption.gameSelection)
-		let player = provider.playerBy(index: self.gameOption.playerSelection)
+		if let game = provider.gameBy(index: self.gameOption.gameSelection), let player = provider.playerBy(index: self.gameOption.playerSelection) {
 
-		let gameViewModel = GameViewModel(name: game?.name ?? R.string.localizable.gamesErrorNoGame())
+			let gameViewModel = GameViewModel(game: game, player: player)
 
-		return gameViewModel
-	}
+			return gameViewModel
+		}
 
-	// for player picker
-	func playerName(at index: Int) -> String {
-		return self.playerItems[index].name
+		return nil
 	}
 }
 
-
 // MARK: UIPickerViewDataSource
+
 extension GamesViewModel: UIPickerViewDataSource {
 
 	func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -89,5 +83,28 @@ extension GamesViewModel: UIPickerViewDataSource {
 
 	func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
 		return self.playerItems.count
+	}
+}
+
+// MARK: Player functions
+
+// for player picker
+extension GamesViewModel {
+
+	func populatePlayers() {
+
+		if let players = provider.players() {
+			for player in players {
+				self.playerItems.append(PlayerItem(name: player.name ?? R.string.localizable.scoresErrorNoPlayer()))
+			}
+		}
+	}
+
+	func playerName(at index: Int) -> String {
+		return self.playerItems[index].name
+	}
+
+	func selectPlayerItem(at index: Int) {
+		self.gameOption.playerSelection = index
 	}
 }

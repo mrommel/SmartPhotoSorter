@@ -9,12 +9,29 @@
 import Foundation
 import SKPhotoBrowser
 
+struct GameItem {
+
+	let photo: SKPhotoProtocol
+	let order: Int
+}
+
 class GameViewModel {
 
-	let name: String
+	//let name: String
+	private var items = [GameItem]()
+	let player: Player?
+	let game: Game?
 
-	init(name: String) {
-		self.name = name
+	init(game: Game, player: Player) {
+
+		self.game = game
+		self.player = player
+
+		self.items = self.createStorage()
+	}
+
+	var pageTitle: String {
+		return self.game?.name ?? R.string.localizable.gameTitleNoGame()
 	}
 
 	func amountOfImages() -> Int {
@@ -22,26 +39,40 @@ class GameViewModel {
 	}
 
 	func score() -> Int {
-		return 10
+
+		let orders = self.items.map { return $0.order }
+
+		let scoreCalculator = ScoreCalculator()
+		let score = scoreCalculator.calculateScore(of: orders)
+
+		return score
 	}
 
-	func createLocalPhotos() -> [SKPhotoProtocol] {
+	func createStorage() -> [GameItem] {
 
 		let amountOfImages = self.amountOfImages()
 
-		return (0..<amountOfImages).map { (i: Int) -> SKPhotoProtocol in
-			let photo = SKPhoto.photoWithImage(UIImage(named: "image\(i%10)")!)
+		return (0..<amountOfImages).map { (i: Int) -> GameItem in
+
+			// FIXME: read from game
+			let photo = SKPhoto.photoWithImage(UIImage(named: "image\(i % 10)")!)
 			photo.caption = R.string.localizable.gameDetailCaption()
-			return photo
+			return GameItem(photo: photo, order: i)
 		}
 	}
 
-	func createLocalOrder() -> [Int] {
+	var allPhotos: [SKPhotoProtocol] {
 
-		let amountOfImages = self.amountOfImages()
+		return self.items.map { return $0.photo }
+	}
 
-		return (0..<amountOfImages).map{ (i: Int) -> Int in
-			return i
-		}
+	func image(at index: Int) -> UIImage {
+
+		return self.items[index].photo.underlyingImage
+	}
+
+	func swap(source: Int, destination: Int) {
+
+		self.items.swapAt(source, destination)
 	}
 }

@@ -21,9 +21,6 @@ class GameViewController: BaseViewController {
 
 	var viewModel: GameViewModel? = nil
 
-	var images = [SKPhotoProtocol]()
-	var order = [Int]()
-
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
@@ -33,18 +30,13 @@ class GameViewController: BaseViewController {
 		SKPhotoBrowserOptions.displayCounterLabel = true
 		SKPhotoBrowserOptions.displayBackAndForwardButton = true
 
-		self.setupPhotoData()
 		self.setupCollectionView()
 
-		self.title = viewModel?.name ?? R.string.localizable.gameTitleNoGame()
+		self.title = viewModel?.pageTitle
 	}
 
 	override var prefersStatusBarHidden: Bool {
 		return false
-	}
-
-	override var preferredStatusBarStyle: UIStatusBarStyle {
-		return .`default`
 	}
 
 	@IBAction func finishBarButtonItemTap(sender: UIBarButtonItem) {
@@ -55,6 +47,8 @@ class GameViewController: BaseViewController {
 			print("Save")
 			// self.viewModel.
 			// inform user about result
+
+			// goto score list
 		}))
 		alert.addAction(UIAlertAction(title: R.string.localizable.gameFinishCancel(), style: .cancel, handler: nil))
 		self.present(alert, animated: true)
@@ -72,15 +66,16 @@ class GameViewController: BaseViewController {
 extension GameViewController: UICollectionViewDataSource {
 
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return images.count
+		return self.viewModel?.amountOfImages() ?? 0
 	}
 
 	@objc(collectionView:cellForItemAtIndexPath:) func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
 		guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.photoCollectionViewCell, for: indexPath) as? PhotoCollectionViewCell else {
 			return UICollectionViewCell()
 		}
 
-		cell.photoImageView.image = self.images[indexPath.row].underlyingImage
+		cell.photoImageView.image = self.viewModel?.image(at: indexPath.row)
 		cell.photoImageView.contentMode = .scaleAspectFill
 		
 		return cell
@@ -91,7 +86,8 @@ extension GameViewController: UICollectionViewDataSource {
 extension GameViewController: UICollectionViewDelegate {
 
 	@objc(collectionView:didSelectItemAtIndexPath:) func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		let browser = SKPhotoBrowser(photos: self.images, initialPageIndex: indexPath.row)
+
+		let browser = SKPhotoBrowser(photos: self.viewModel?.allPhotos ?? [], initialPageIndex: indexPath.row)
 
 		browser.delegate = self
 
@@ -99,6 +95,7 @@ extension GameViewController: UICollectionViewDelegate {
 	}
 
 	func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath) -> CGSize {
+
 		if UIDevice.current.userInterfaceIdiom == .pad {
 			return CGSize(width: UIScreen.main.bounds.size.width / 2 - 5, height: 300)
 		} else {
@@ -119,19 +116,17 @@ extension GameViewController: UICollectionViewDelegate {
 
 		if fromIndex < toIndex {
 			for index in fromIndex..<toIndex {
-				self.images.swapAt(index, index + 1)
-				self.order.swapAt(index, index + 1)
+				self.viewModel?.swap(source: index, destination: index + 1)
 			}
 		} else {
 			for index in (toIndex..<fromIndex).reversed() {
-				self.images.swapAt(index, index + 1)
-				self.order.swapAt(index, index + 1)
+				self.viewModel?.swap(source: index, destination: index + 1)
 			}
 		}
 
-		let scoreCalculator = ScoreCalculator()
-		let score = scoreCalculator.calculateScore(of: self.order)
-		print("score: \(score)")
+		if let score = self.viewModel?.score() {
+			print("score: \(score)")
+		}
 
 		self.collectionView.reloadData()
 	}
@@ -141,13 +136,13 @@ extension GameViewController: UICollectionViewDelegate {
 extension GameViewController: SKPhotoBrowserDelegate {
 
 	func didShowPhotoAtIndex(_ index: Int) {
-		collectionView.visibleCells.forEach({$0.isHidden = false})
-		collectionView.cellForItem(at: IndexPath(item: index, section: 0))?.isHidden = true
+		self.collectionView.visibleCells.forEach({$0.isHidden = false})
+		self.collectionView.cellForItem(at: IndexPath(item: index, section: 0))?.isHidden = true
 	}
 
 	func willDismissAtPageIndex(_ index: Int) {
-		collectionView.visibleCells.forEach({$0.isHidden = false})
-		collectionView.cellForItem(at: IndexPath(item: index, section: 0))?.isHidden = true
+		self.collectionView.visibleCells.forEach({$0.isHidden = false})
+		self.collectionView.cellForItem(at: IndexPath(item: index, section: 0))?.isHidden = true
 	}
 
 	func willShowActionSheet(_ photoIndex: Int) {
@@ -155,7 +150,7 @@ extension GameViewController: SKPhotoBrowserDelegate {
 	}
 
 	func didDismissAtPageIndex(_ index: Int) {
-		collectionView.cellForItem(at: IndexPath(item: index, section: 0))?.isHidden = false
+		self.collectionView.cellForItem(at: IndexPath(item: index, section: 0))?.isHidden = false
 	}
 
 	func didDismissActionSheetWithButtonIndex(_ buttonIndex: Int, photoIndex: Int) {
@@ -167,7 +162,7 @@ extension GameViewController: SKPhotoBrowserDelegate {
 	}
 
 	func viewForPhoto(_ browser: SKPhotoBrowser, index: Int) -> UIView? {
-		return collectionView.cellForItem(at: IndexPath(item: index, section: 0))
+		return self.collectionView.cellForItem(at: IndexPath(item: index, section: 0))
 	}
 
 	func captionViewForPhotoAtIndex(index: Int) -> SKCaptionView? {
@@ -178,33 +173,28 @@ extension GameViewController: SKPhotoBrowserDelegate {
 // MARK: - private
 private extension GameViewController {
 
-	func setupPhotoData() {
-		self.images = self.viewModel?.createLocalPhotos() ?? []
-		self.order = self.viewModel?.createLocalOrder() ?? []
-	}
-
 	func setupCollectionView() {
-		collectionView.delegate = self
-		collectionView.dataSource = self
+		self.collectionView.delegate = self
+		self.collectionView.dataSource = self
 
 		self.longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.handleLongGesture(gesture:)))
-		collectionView.addGestureRecognizer(longPressGesture)
+		self.collectionView.addGestureRecognizer(longPressGesture)
 	}
 
 	@objc func handleLongGesture(gesture: UILongPressGestureRecognizer) {
 		switch(gesture.state) {
 
 		case .began:
-			guard let selectedIndexPath = collectionView.indexPathForItem(at: gesture.location(in: collectionView)) else {
+			guard let selectedIndexPath = self.collectionView.indexPathForItem(at: gesture.location(in: self.collectionView)) else {
 				break
 			}
-			collectionView.beginInteractiveMovementForItem(at: selectedIndexPath)
+			self.collectionView.beginInteractiveMovementForItem(at: selectedIndexPath)
 		case .changed:
-			collectionView.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
+			self.collectionView.updateInteractiveMovementTargetPosition(gesture.location(in: gesture.view!))
 		case .ended:
-			collectionView.endInteractiveMovement()
+			self.collectionView.endInteractiveMovement()
 		default:
-			collectionView.cancelInteractiveMovement()
+			self.collectionView.cancelInteractiveMovement()
 		}
 	}
 }

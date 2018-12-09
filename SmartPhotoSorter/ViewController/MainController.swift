@@ -9,25 +9,13 @@
 import UIKit
 import Rswift
 
-struct MenuItem {
-	let title: String
-	let image: UIImage?
-	let segue: String?
-}
-
 private enum Constants {
-	static let showGames = "showGames"
-	static let showScores = "showScores"
-	static let showOptions = "showOptions"
+	static let textCell = "TextCell"
 }
 
 class MainController: BaseTableViewController {
 
-	let menuItems: [MenuItem] = [
-		MenuItem(title: R.string.localizable.mainMenuGames(), image: R.image.rocket(), segue: Constants.showGames),
-		MenuItem(title: R.string.localizable.mainMenuScores(), image: R.image.score(), segue: Constants.showScores),
-		MenuItem(title: R.string.localizable.mainMenuOptions(), image: R.image.options(), segue: Constants.showOptions)
-	]
+	var viewModel: MainViewModel = MainViewModel()
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -45,7 +33,7 @@ extension MainController {
 	}
 
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return menuItems.count
+		return self.viewModel.menuItemsCount
 	}
 }
 
@@ -55,8 +43,8 @@ extension MainController {
 
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-		let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath)
-		let menuItem = menuItems[indexPath.row]
+		let cell = tableView.dequeueReusableCell(withIdentifier: Constants.textCell, for: indexPath)
+		let menuItem = self.viewModel.menuItem(at: indexPath.row)
 
 		cell.imageView?.image = menuItem.image
 		cell.textLabel?.text = menuItem.title
@@ -65,7 +53,8 @@ extension MainController {
 	}
 
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let menuItem = menuItems[indexPath.row]
+
+		let menuItem = self.viewModel.menuItem(at: indexPath.row)
 
 		if let segue = menuItem.segue {
 			self.performSegue(withIdentifier: segue, sender: self)

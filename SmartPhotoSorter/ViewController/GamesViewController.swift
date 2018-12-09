@@ -12,6 +12,7 @@ import Rswift
 private enum Constants {
 	static let startGame = "startGame"
 	static let contentViewController = "contentViewController"
+	static let textCell = "TextCell"
 }
 
 class GamesViewController: BaseTableViewController {
@@ -58,7 +59,7 @@ extension GamesViewController {
 
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-		let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath)
+		let cell = tableView.dequeueReusableCell(withIdentifier: Constants.textCell, for: indexPath)
 		let gamesItem = self.viewModel?.item(at: indexPath.row)
 
 		cell.imageView?.image = R.image.rocket()
