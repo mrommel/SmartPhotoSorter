@@ -23,18 +23,23 @@
 
 /*** GameViewController ***/
 "Game.Title.NoGame" = "No Game";
-"Game.Detail.Caption" = "The chronological order can only be changed thru drag'n'drop in the list.b";
+"Game.Detail.Caption" = "The chronological order can only be changed thru drag'n'drop in the list.";
 "Game.Finish.Title" = "Ready";
 "Game.Finish.Description" = "Are you ready sorting the pictures in chronological order?";
 "Game.Finish.Done" = "Done";
 "Game.Finish.Cancel" = "Cancel";
 
 /*** ScoresViewController ***/
+"Scores.Title" = "Score";
 "Scores.Error.NoPlayer" = "No player name";
 
 /*** OptionsViewController ***/
 "Options.Title" = "Options";
+"Options.Section.Data" = "Data";
 "Options.Item.Populate" = "Populate";
 "Options.Item.Reset" = "Reset";
+"Options.Section.Theme" = "Theme";
 "Options.Item.Light" = "Light";
 "Options.Item.Dark" = "Dark";
+"Options.Task.Reset" = "Resetting data ...";
+"Options.Task.Populate" = "Populating data ...";

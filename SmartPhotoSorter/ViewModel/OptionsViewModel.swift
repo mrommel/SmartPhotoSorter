@@ -45,18 +45,19 @@ class OptionsViewModel {
 
 		self.gameUseCase = AppCore.shared.gameUseCase
 
-		let sectionData = OptionsSection(title: "Data")
+		let sectionData = OptionsSection(title: R.string.localizable.optionsSectionData())
 		sectionData.items.append(OptionsItem(title: R.string.localizable.optionsItemPopulate(), image: R.image.populate()!, identifier: .populate))
 		sectionData.items.append(OptionsItem(title: R.string.localizable.optionsItemReset(), image: R.image.trash()!, identifier: .reset))
 		self.optionsSections.append(sectionData)
 
-		let sectionTheme = OptionsSection(title: "Theme")
+		let sectionTheme = OptionsSection(title: R.string.localizable.optionsSectionTheme())
 		sectionTheme.items.append(OptionsItem(title: R.string.localizable.optionsItemLight(), image: R.image.light()!, identifier: .light))
 		sectionTheme.items.append(OptionsItem(title: R.string.localizable.optionsItemDark(), image: R.image.dark()!, identifier: .dark))
 		self.optionsSections.append(sectionTheme)
 	}
 
 	var sectionCount: Int {
+		
 		return self.optionsSections.count
 	}
 
@@ -97,7 +98,7 @@ class OptionsViewModel {
 
 	private func resetData() {
 
-		SwiftSpinner.show("Resetting data ...")
+		SwiftSpinner.show(R.string.localizable.optionsTaskReset())
 
 		DispatchQueue.global(qos: .background).async {
 
@@ -111,7 +112,7 @@ class OptionsViewModel {
 
 	private func populate() {
 
-		SwiftSpinner.show("Initializing data ...")
+		SwiftSpinner.show(R.string.localizable.optionsTaskPopulate())
 
 		DispatchQueue.global(qos: .background).async {
 

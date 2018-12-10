@@ -97,6 +97,7 @@
 		046BAF7421BE924E00977071 /* AppCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCore.swift; sourceTree = "<group>"; };
 		046BAF7621BE947500977071 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		046BAF7821BE990700977071 /* GameUserCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameUserCase.swift; sourceTree = "<group>"; };
+		046BAF7A21BEB1E100977071 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		34612EFC80932ACCCEB9D72F /* Pods_SmartPhotoSorter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartPhotoSorter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		936658439A35F1AA9D651967 /* Pods-SmartPhotoSorter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartPhotoSorter.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartPhotoSorter/Pods-SmartPhotoSorter.release.xcconfig"; sourceTree = "<group>"; };
 		B81A5B679A8B32BDDA3EC8AB /* Pods-SmartPhotoSorter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartPhotoSorter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartPhotoSorter/Pods-SmartPhotoSorter.debug.xcconfig"; sourceTree = "<group>"; };
@@ -308,6 +309,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = 0458727521B7B686001B43A8;
 			productRefGroup = 0458727F21B7B686001B43A8 /* Products */;
@@ -473,6 +475,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				045872A521B7DDF8001B43A8 /* en */,
+				046BAF7A21BEB1E100977071 /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -545,6 +549,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

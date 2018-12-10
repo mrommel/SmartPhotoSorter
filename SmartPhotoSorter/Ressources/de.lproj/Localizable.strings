@@ -1,0 +1,45 @@
+/* 
+  Localizable.strings
+  SmartPhotoSorter
+
+  Created by Michael Rommel on 05.12.18.
+  Copyright © 2018 Michael Rommel. All rights reserved.
+*/
+"App.Title" = "Smart Photo Sorter";
+
+/*** MainViewController ***/
+"Main.Title" = "Smart Photo Sorter";
+"Main.Menu.Games" = "Spiele";
+"Main.Menu.Scores" = "Punkte";
+"Main.Menu.Options" = "Optionen";
+
+/*** GamesViewController ***/
+"Games.Title" = "Spiele";
+"Games.Error.NoGame" = "Kein Spiel";
+"Games.Player.Title" = "Wähle Spieler";
+"Games.Player.Description" = "Bitte wähle einen Spieler:";
+"Games.Player.Done" = "Fertig";
+"Games.Player.Cancel" = "Abbrechen";
+
+/*** GameViewController ***/
+"Game.Title.NoGame" = "Kein Spiel";
+"Game.Detail.Caption" = "Die Reihenfolge der Bilder kann nur in der Liste mit drag'n'drop geändert werden.";
+"Game.Finish.Title" = "Fertig";
+"Game.Finish.Description" = "Bist du schon fertig mit dem Sortieren der Bilder?";
+"Game.Finish.Done" = "Fertig";
+"Game.Finish.Cancel" = "Abbrechen";
+
+/*** ScoresViewController ***/
+"Scores.Title" = "Punkte";
+"Scores.Error.NoPlayer" = "Kein Spielername";
+
+/*** OptionsViewController ***/
+"Options.Title" = "Optionen";
+"Options.Section.Data" = "Daten";
+"Options.Item.Populate" = "Füllen";
+"Options.Item.Reset" = "Zurücksetzen";
+"Options.Section.Theme" = "Gestaltung";
+"Options.Item.Light" = "Hell";
+"Options.Item.Dark" = "Dunkel";
+"Options.Task.Reset" = "Zurücksetzen der Daten ...";
+"Options.Task.Populate" = "Füllen der Daten ...";
