@@ -25,13 +25,13 @@ class AppCore {
 			return DataController(nil)
 		}.inObjectScope(.container)
 
-		self.container.register(DataProvider.self) { resolver in
+		self.container.register(DataProviderProtocol.self) { resolver in
 			let dataController = self.container.resolve(DataControllerProtocol.self)!
 			return DataProvider(dataController: dataController)
 		}.inObjectScope(.container)
 
 		self.container.register(GameUseCaseProtocol.self) { resolver in
-			let dataProvider = self.container.resolve(DataProvider.self)!
+			let dataProvider = self.container.resolve(DataProviderProtocol.self)!
 			return GameUserCase(dataProvider: dataProvider)
 		}.inObjectScope(.container)
 	}

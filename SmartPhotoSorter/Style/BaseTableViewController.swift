@@ -39,7 +39,7 @@ class BaseTableViewController: UITableViewController, ThemeAware {
 		let theme = ThemeManager.currentTheme()
 
 		self.view.backgroundColor = theme.backgroundColor
-		self.tableView.backgroundColor = .clear
+		self.tableView.backgroundColor = theme.backgroundColor
 		self.navigationController?.navigationBar.barStyle = theme.barStyle
 		self.navigationController?.view.backgroundColor = theme.backgroundColor
 
