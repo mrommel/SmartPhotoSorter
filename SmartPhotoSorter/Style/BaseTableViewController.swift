@@ -6,7 +6,6 @@
 //  Copyright © 2018 Michael Rommel. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class BaseTableViewController: UITableViewController, ThemeAware {
@@ -40,7 +39,7 @@ class BaseTableViewController: UITableViewController, ThemeAware {
 		let theme = ThemeManager.currentTheme()
 
 		self.view.backgroundColor = theme.backgroundColor
-		self.tableView.backgroundColor = theme.backgroundColor
+		self.tableView.backgroundColor = .clear
 		self.navigationController?.navigationBar.barStyle = theme.barStyle
 		self.navigationController?.view.backgroundColor = theme.backgroundColor
 
@@ -55,7 +54,11 @@ class BaseTableViewController: UITableViewController, ThemeAware {
 
 		cell.textLabel?.textColor = theme.titleTextColor
 		cell.detailTextLabel?.textColor = theme.subtitleTextColor
-		cell.backgroundColor = theme.backgroundColor
+		cell.backgroundColor = .clear
+
+		let backgroundView = UIView()
+		backgroundView.backgroundColor = theme.mainColor
+		cell.selectedBackgroundView = backgroundView
 	}
 
 	override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

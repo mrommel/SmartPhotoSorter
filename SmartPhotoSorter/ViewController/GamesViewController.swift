@@ -92,7 +92,7 @@ extension GamesViewController {
 		alert.addAction(UIAlertAction(title: R.string.localizable.gamesPlayerCancel(), style: .cancel, handler: nil))
 		self.present(alert, animated: true)
 
-		tableView.deselectRow(at: indexPath, animated: true)
+		self.tableView.deselectRow(at: indexPath, animated: true)
 	}
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

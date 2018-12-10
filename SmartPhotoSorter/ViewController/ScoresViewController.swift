@@ -66,6 +66,6 @@ extension ScoresViewController {
 			self.performSegue(withIdentifier: segue, sender: self)
 		}*/
 
-		tableView.deselectRow(at: indexPath, animated: true)
+		self.tableView.deselectRow(at: indexPath, animated: true)
 	}
 }

@@ -56,6 +56,8 @@ extension MainController {
 
 		let menuItem = self.viewModel.menuItem(at: indexPath.row)
 
+		self.tableView.deselectRow(at: indexPath, animated: true)
+
 		if let segue = menuItem.segue {
 			self.performSegue(withIdentifier: segue, sender: self)
 		}

@@ -19,35 +19,24 @@ extension Game {
 
     @NSManaged public var name: String?
     @NSManaged public var scores: Score?
-    @NSManaged public var photos: Photo?
+	@NSManaged public var photos: NSSet?
 
 }
 
+// MARK: Generated accessors for photos
 extension Game {
 
-	@discardableResult
-	func add(photo image: UIImage?, and name: String, with order: Int) -> Photo? {
+	@objc(addPhotosObject:)
+	@NSManaged public func addToPhotos(_ value: Photo)
 
-		guard let image = image else {
-			print("Nil for image is not allowed.")
-			return nil
-		}
+	@objc(removePhotosObject:)
+	@NSManaged public func removeFromPhotos(_ value: Photo)
 
-		guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-			print("Could not get app delegate.")
-			return nil
-		}
+	@objc(addPhotos:)
+	@NSManaged public func addToPhotos(_ values: NSSet)
 
-		let managedContext = appDelegate.persistentContainer.viewContext
+	@objc(removePhotos:)
+	@NSManaged public func removeFromPhotos(_ values: NSSet)
 
-		let photoEntity = NSEntityDescription.entity(forEntityName: "Photo", in: managedContext)!
-
-		let photo = NSManagedObject(entity: photoEntity, insertInto: managedContext)
-		photo.setValue(name, forKeyPath: "name")
-		photo.setValue(image.pngData(), forKeyPath: "imageData")
-		photo.setValue(self, forKeyPath: "game")
-		photo.setValue(order, forKeyPath: "order")
-
-		return photo as? Photo
-	}
 }
+

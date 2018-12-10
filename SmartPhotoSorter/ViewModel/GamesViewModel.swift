@@ -27,13 +27,16 @@ struct GameOption {
 
 class GamesViewModel: NSObject {
 
-	fileprivate let provider = GameProvider()
 	var gameItems: [GamesItem] = []
 	var playerItems: [PlayerItem] = []
 	var gameOption: GameOption = GameOption()
 
+	var gameUseCase: GameUseCaseProtocol?
+
 	override init() {
 		super.init()
+
+		self.gameUseCase = AppCore.shared.gameUseCase
 
 		self.populateGames()
 		self.populatePlayers()
@@ -41,7 +44,7 @@ class GamesViewModel: NSObject {
 
 	func populateGames() {
 
-		if let games = provider.games() {
+		if let games = self.gameUseCase?.games() {
 			for game in games {
 				self.gameItems.append(GamesItem(title: game.name ?? R.string.localizable.gamesErrorNoGame()))
 			}
@@ -62,7 +65,8 @@ class GamesViewModel: NSObject {
 
 	func createGameViewModel() -> GameViewModel? {
 
-		if let game = provider.gameBy(index: self.gameOption.gameSelection), let player = provider.playerBy(index: self.gameOption.playerSelection) {
+		if let game = gameUseCase?.game(by: self.gameOption.gameSelection),
+			let player = gameUseCase?.player(by: self.gameOption.playerSelection) {
 
 			let gameViewModel = GameViewModel(game: game, player: player)
 
@@ -93,7 +97,7 @@ extension GamesViewModel {
 
 	func populatePlayers() {
 
-		if let players = provider.players() {
+		if let players = gameUseCase?.players() {
 			for player in players {
 				self.playerItems.append(PlayerItem(name: player.name ?? R.string.localizable.scoresErrorNoPlayer()))
 			}

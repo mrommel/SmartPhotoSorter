@@ -2,7 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18B75" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Game" representedClassName="Game" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="photos" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Photo" inverseName="game" inverseEntity="Photo" syncable="YES"/>
+        <relationship name="photos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Photo" inverseName="game" inverseEntity="Photo" syncable="YES"/>
         <relationship name="scores" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Score" inverseName="game" inverseEntity="Score" syncable="YES"/>
     </entity>
     <entity name="Photo" representedClassName="Photo" syncable="YES">
@@ -22,9 +22,9 @@
         <relationship name="player" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Player" inverseName="scores" inverseEntity="Player" syncable="YES"/>
     </entity>
     <elements>
+        <element name="Game" positionX="-36" positionY="54" width="128" height="90"/>
+        <element name="Photo" positionX="-45" positionY="27" width="128" height="105"/>
         <element name="Player" positionX="-63" positionY="-18" width="128" height="75"/>
         <element name="Score" positionX="-54" positionY="0" width="128" height="105"/>
-        <element name="Photo" positionX="-45" positionY="27" width="128" height="105"/>
-        <element name="Game" positionX="-36" positionY="54" width="128" height="90"/>
     </elements>
 </model>

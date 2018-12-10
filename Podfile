@@ -6,9 +6,12 @@ def shared_pods
   pod 'SwiftLint'
   pod 'R.swift', '5.0.0.alpha.2'
   pod 'SKPhotoBrowser'
+  pod 'SwiftSpinner'
+
+  pod 'Swinject'
 end
 
-target "SmartPhotoSorter" do
+target 'SmartPhotoSorter' do
   shared_pods
 end
 

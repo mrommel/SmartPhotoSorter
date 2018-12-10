@@ -91,6 +91,6 @@ extension OptionsViewController {
 
 		self.viewModel.handle(identifier: optionItem.identifier)
 
-		tableView.deselectRow(at: indexPath, animated: true)
+		self.tableView.deselectRow(at: indexPath, animated: true)
 	}
 }

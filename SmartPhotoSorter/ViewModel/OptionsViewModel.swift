@@ -8,8 +8,10 @@
 
 import UIKit
 import Rswift
+import SwiftSpinner
 
 enum OptionsType {
+	
 	case populate
 	case reset
 	case light
@@ -17,6 +19,7 @@ enum OptionsType {
 }
 
 struct OptionsItem {
+
 	let title: String
 	let image: UIImage
 	let identifier: OptionsType
@@ -36,8 +39,11 @@ class OptionsSection {
 class OptionsViewModel {
 
 	var optionsSections: [OptionsSection] = []
+	var gameUseCase: GameUseCaseProtocol
 
 	init() {
+
+		self.gameUseCase = AppCore.shared.gameUseCase
 
 		let sectionData = OptionsSection(title: "Data")
 		sectionData.items.append(OptionsItem(title: R.string.localizable.optionsItemPopulate(), image: R.image.populate()!, identifier: .populate))
@@ -79,7 +85,7 @@ class OptionsViewModel {
 
 		switch(identifier) {
 		case .populate:
-			self.initData()
+			self.populate()
 		case .reset:
 			self.resetData()
 		case .light:
@@ -91,14 +97,30 @@ class OptionsViewModel {
 
 	private func resetData() {
 
-		let provider = GameProvider()
-		provider.reset()
+		SwiftSpinner.show("Resetting data ...")
+
+		DispatchQueue.global(qos: .background).async {
+
+			self.gameUseCase.reset()
+
+			DispatchQueue.main.async {
+				SwiftSpinner.hide()
+			}
+		}
 	}
 
-	private func initData() {
+	private func populate() {
 
-		let provider = GameProvider()
-		provider.initData()
+		SwiftSpinner.show("Initializing data ...")
+
+		DispatchQueue.global(qos: .background).async {
+
+			self.gameUseCase.populate()
+
+			DispatchQueue.main.async {
+				SwiftSpinner.hide()
+			}
+		}
 	}
 
 	private func switchDark() {

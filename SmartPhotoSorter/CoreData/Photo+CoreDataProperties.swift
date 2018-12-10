@@ -13,14 +13,14 @@ import UIKit
 
 extension Photo {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Photo> {
-        return NSFetchRequest<Photo>(entityName: "Photo")
-    }
+	@nonobjc public class func fetchRequest() -> NSFetchRequest<Photo> {
+		return NSFetchRequest<Photo>(entityName: "Photo")
+	}
 
-    @NSManaged public var imageData: NSData?
-    @NSManaged public var name: String?
-    @NSManaged public var order: Int32
-    @NSManaged public var game: Game?
+	@NSManaged public var imageData: NSData?
+	@NSManaged public var name: String?
+	@NSManaged public var order: Int32
+	@NSManaged public var game: Game?
 
 }
 
