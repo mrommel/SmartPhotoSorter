@@ -31,11 +31,13 @@ class GameViewModel {
 	}
 
 	var pageTitle: String {
+
 		return self.game?.name ?? R.string.localizable.gameTitleNoGame()
 	}
 
 	func amountOfImages() -> Int {
-		return 10
+
+		return self.game?.photos?.count ?? 0
 	}
 
 	func score() -> Int {
@@ -51,13 +53,16 @@ class GameViewModel {
 	func createStorage() -> [GameItem] {
 
 		let amountOfImages = self.amountOfImages()
+		guard let allPhotos = self.game?.photos?.allObjects as? [Photo] else {
+			return []
+		}
 
 		return (0..<amountOfImages).map { (i: Int) -> GameItem in
 
-			// FIXME: read from game
-			let photo = SKPhoto.photoWithImage(UIImage(named: "image\(i % 10)")!)
+			// read from game
+			let photo = SKPhoto.photoWithImage(allPhotos[i].image())
 			photo.caption = R.string.localizable.gameDetailCaption()
-			return GameItem(photo: photo, order: i)
+			return GameItem(photo: photo, order: i) // FIXME - read order from db
 		}
 	}
 
