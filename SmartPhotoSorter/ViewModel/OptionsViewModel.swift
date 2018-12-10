@@ -11,7 +11,8 @@ import Rswift
 import SwiftSpinner
 
 enum OptionsType {
-	
+
+	case none
 	case populate
 	case reset
 	case light
@@ -38,10 +39,13 @@ class OptionsSection {
 
 class OptionsViewModel {
 
+	var viewController: OptionsViewControllerProtocol
 	var optionsSections: [OptionsSection] = []
 	var gameUseCase: GameUseCaseProtocol
 
-	init() {
+	init(viewController: OptionsViewControllerProtocol) {
+
+		self.viewController = viewController
 
 		self.gameUseCase = AppCore.shared.gameUseCase
 
@@ -85,6 +89,8 @@ class OptionsViewModel {
 	func handle(identifier: OptionsType) {
 
 		switch(identifier) {
+		case .none:
+			break
 		case .populate:
 			self.populate()
 		case .reset:
@@ -97,6 +103,13 @@ class OptionsViewModel {
 	}
 
 	private func resetData() {
+
+		if self.gameUseCase.isInitialized() {
+			self.viewController.showDataResetWarningAlert()
+		}
+	}
+
+	func executeReset() {
 
 		SwiftSpinner.show(R.string.localizable.optionsTaskReset())
 
@@ -111,6 +124,15 @@ class OptionsViewModel {
 	}
 
 	private func populate() {
+
+		if self.gameUseCase.isInitialized() {
+			self.viewController.showDataPopulateWarningAlert()
+		} else {
+			self.executePopulate()
+		}
+	}
+
+	func executePopulate() {
 
 		SwiftSpinner.show(R.string.localizable.optionsTaskPopulate())
 
