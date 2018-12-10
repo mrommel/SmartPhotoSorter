@@ -15,10 +15,12 @@ private enum Constants {
 
 class MainController: BaseTableViewController {
 
-	var viewModel: MainViewModel = MainViewModel()
+	var viewModel: MainViewModel? = nil
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+
+		self.viewModel = MainViewModel()
 
 		self.title = R.string.localizable.mainTitle()
 	}
@@ -33,7 +35,7 @@ extension MainController {
 	}
 
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return self.viewModel.menuItemsCount
+		return self.viewModel?.menuItemsCount ?? 0
 	}
 }
 
@@ -44,22 +46,24 @@ extension MainController {
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
 		let cell = tableView.dequeueReusableCell(withIdentifier: Constants.textCell, for: indexPath)
-		let menuItem = self.viewModel.menuItem(at: indexPath.row)
 
-		cell.imageView?.image = menuItem.image
-		cell.textLabel?.text = menuItem.title
+		if let menuItem = self.viewModel?.menuItem(at: indexPath.row) {
+			cell.imageView?.image = menuItem.image
+			cell.textLabel?.text = menuItem.title
+		}
 
 		return cell
 	}
 
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-		let menuItem = self.viewModel.menuItem(at: indexPath.row)
+		if let menuItem = self.viewModel?.menuItem(at: indexPath.row) {
 
-		self.tableView.deselectRow(at: indexPath, animated: true)
+			self.tableView.deselectRow(at: indexPath, animated: true)
 
-		if let segue = menuItem.segue {
-			self.performSegue(withIdentifier: segue, sender: self)
+			if let segue = menuItem.segue {
+				self.performSegue(withIdentifier: segue, sender: self)
+			}
 		}
 	}
 

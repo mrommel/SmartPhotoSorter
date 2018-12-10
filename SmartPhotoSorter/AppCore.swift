@@ -22,7 +22,7 @@ class AppCore {
 	public func setup() {
 		// register data provider
 		self.container.register(DataControllerProtocol.self) { _ in
-			return DataController(nil)
+			return DataController()
 		}.inObjectScope(.container)
 
 		self.container.register(DataProviderProtocol.self) { resolver in

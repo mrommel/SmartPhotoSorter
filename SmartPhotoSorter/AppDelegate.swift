@@ -24,6 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		AppCore.reset()
 		AppCore.shared.setup()
 
+		// check if data needs to be populated
+		if !AppCore.shared.gameUseCase.isInitialized() {
+			AppCore.shared.gameUseCase.populate()
+		}
+
 		return true
 	}
 

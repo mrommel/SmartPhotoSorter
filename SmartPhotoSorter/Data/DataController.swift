@@ -31,7 +31,7 @@ class DataController: DataControllerProtocol {
 
 	private var managedObjectContextPrivate: NSManagedObjectContext
 
-	init(_ completionClosure: ((_ dataController: DataController) -> Void)?) {
+	init() {
 		// This resource is the same name as your xcdatamodeld contained in your project
 		let bundle = Bundle(for: DataController.self)
 		guard let modelURL = bundle.url(forResource: Constants.dbName, withExtension: Constants.dbExtension) else {
@@ -47,15 +47,7 @@ class DataController: DataControllerProtocol {
 		managedObjectContextPrivate = NSManagedObjectContext(concurrencyType: NSManagedObjectContextConcurrencyType.privateQueueConcurrencyType)
 		managedObjectContextPrivate.persistentStoreCoordinator = psc
 
-		let queue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background)
-		queue.async {
-			self.createContext()
-
-			//The callback block is expected to complete the User Interface and therefore should be presented back on the main queue so that the user interface does not need to be concerned with which queue this call is coming from.
-			DispatchQueue.main.sync {
-				completionClosure?(self)
-			}
-		}
+		self.createContext()
 	}
 
 	/// create the persistance store context
