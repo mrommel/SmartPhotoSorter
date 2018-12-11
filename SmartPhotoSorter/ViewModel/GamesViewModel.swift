@@ -42,6 +42,11 @@ class GamesViewModel: NSObject {
 		self.populatePlayers()
 	}
 
+	func pageTitle() -> String {
+
+		return R.string.localizable.gamesTitle()
+	}
+
 	func populateGames() {
 
 		if let games = self.gameUseCase?.games() {

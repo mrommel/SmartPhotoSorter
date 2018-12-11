@@ -17,8 +17,8 @@ struct GameItem {
 
 class GameViewModel {
 
-	//let name: String
 	private var items = [GameItem]()
+	var viewController: GameViewController? = nil
 	let player: Player?
 	let game: Game?
 
@@ -79,5 +79,18 @@ class GameViewModel {
 	func swap(source: Int, destination: Int) {
 
 		self.items.swapAt(source, destination)
+	}
+
+	func finishGame() {
+
+		print("finishGame")
+
+		// go to main menu
+		self.viewController?.navigationController?.popViewController(animated: true)
+
+		// go to scores list
+		let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+		let scoresViewController = storyBoard.instantiateViewController(withIdentifier: "scoresViewController") as! ScoresViewController
+		self.viewController?.navigationController?.pushViewController(scoresViewController, animated: true)
 	}
 }

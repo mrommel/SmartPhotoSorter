@@ -24,7 +24,7 @@ class GamesViewController: BaseTableViewController {
 
 		self.viewModel = GamesViewModel()
 
-		self.title = R.string.localizable.gamesTitle()
+		self.title = self.viewModel?.pageTitle()
 	}
 }
 

@@ -24,6 +24,8 @@ class GameViewController: BaseViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
+		self.viewModel?.viewController = self
+
 		// Static setup
 		SKPhotoBrowserOptions.displayAction = true
 		SKPhotoBrowserOptions.displayStatusbar = true
@@ -44,11 +46,7 @@ class GameViewController: BaseViewController {
 		let alert = UIAlertController(title: R.string.localizable.gameFinishTitle(), message: R.string.localizable.gameFinishDescription(), preferredStyle: .alert)
 		alert.addAction(UIAlertAction(title: R.string.localizable.gameFinishDone(), style: .default, handler: { action in
 
-			print("Save")
-			// self.viewModel.
-			// inform user about result
-
-			// goto score list
+			self.viewModel?.finishGame()
 		}))
 		alert.addAction(UIAlertAction(title: R.string.localizable.gameFinishCancel(), style: .cancel, handler: nil))
 		self.present(alert, animated: true)
@@ -124,6 +122,7 @@ extension GameViewController: UICollectionViewDelegate {
 			}
 		}
 
+		// FIXME: remove debug
 		if let score = self.viewModel?.score() {
 			print("score: \(score)")
 		}
