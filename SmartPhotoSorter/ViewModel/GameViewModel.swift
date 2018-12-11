@@ -62,7 +62,7 @@ class GameViewModel {
 			// read from game
 			let photo = SKPhoto.photoWithImage(allPhotos[i].image())
 			photo.caption = R.string.localizable.gameDetailCaption()
-			return GameItem(photo: photo, order: i) // FIXME - read order from db
+			return GameItem(photo: photo, order: Int(allPhotos[i].order))
 		}
 	}
 
@@ -90,7 +90,8 @@ class GameViewModel {
 
 		// go to scores list
 		let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-		let scoresViewController = storyBoard.instantiateViewController(withIdentifier: "scoresViewController") as! ScoresViewController
-		self.viewController?.navigationController?.pushViewController(scoresViewController, animated: true)
+		if let scoresViewController = storyBoard.instantiateViewController(withIdentifier: "scoresViewController") as? ScoresViewController {
+			self.viewController?.navigationController?.pushViewController(scoresViewController, animated: true)
+		}
 	}
 }

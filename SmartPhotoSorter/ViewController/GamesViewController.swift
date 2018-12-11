@@ -86,7 +86,7 @@ extension GamesViewController {
 		alert.addAction(UIAlertAction(title: R.string.localizable.gamesPlayerDone(), style: .default, handler: { action in
 
 			// start game
-			// a new game is prepared
+			// a new game is prepared in 'prepare for segue'
 			self.performSegue(withIdentifier: Constants.startGame, sender: self)
 		}))
 		alert.addAction(UIAlertAction(title: R.string.localizable.gamesPlayerCancel(), style: .cancel, handler: nil))
