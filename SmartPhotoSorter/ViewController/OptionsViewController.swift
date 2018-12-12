@@ -24,8 +24,8 @@ class OptionsViewController: BaseTableViewController {
 
 		self.viewModel = OptionsViewModel(viewController: self)
 
-		self.tableView.register(OptionsHeader.self, forHeaderFooterViewReuseIdentifier: OptionsHeader.reuseIdentifer)
-		self.tableView.register(OptionsSectionHeader.self, forHeaderFooterViewReuseIdentifier: OptionsSectionHeader.reuseIdentifer)
+		self.tableView.register(TableHeaderWithImage.self, forHeaderFooterViewReuseIdentifier: TableHeaderWithImage.reuseIdentifer)
+		self.tableView.register(TableSectionHeader.self, forHeaderFooterViewReuseIdentifier: TableSectionHeader.reuseIdentifer)
 
 		self.title = R.string.localizable.optionsTitle()
 	}
@@ -89,7 +89,7 @@ extension OptionsViewController {
 		let title = self.viewModel?.sectionTitle(at: section)
 
 		if section == 0 {
-			guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: OptionsHeader.reuseIdentifer) as? OptionsHeader else {
+			guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: TableHeaderWithImage.reuseIdentifer) as? TableHeaderWithImage else {
 				return nil
 			}
 
@@ -98,7 +98,7 @@ extension OptionsViewController {
 
 			return header
 		} else {
-			guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: OptionsSectionHeader.reuseIdentifer) as? OptionsSectionHeader else {
+			guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: TableSectionHeader.reuseIdentifer) as? TableSectionHeader else {
 				return nil
 			}
 

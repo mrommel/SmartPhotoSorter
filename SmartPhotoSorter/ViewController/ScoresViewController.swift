@@ -11,10 +11,15 @@ import Rswift
 
 class ScoresViewController: BaseTableViewController {
 
-	let viewModel = ScoresViewModel()
+	var viewModel: ScoresViewModel? = nil
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
+
+		self.viewModel = ScoresViewModel()
+
+		self.tableView.register(TableHeaderWithImage.self, forHeaderFooterViewReuseIdentifier: TableHeaderWithImage.reuseIdentifer)
+		self.tableView.register(TableSectionHeader.self, forHeaderFooterViewReuseIdentifier: TableSectionHeader.reuseIdentifer)
 
 		self.title = "Scores"
 	}
@@ -25,11 +30,11 @@ class ScoresViewController: BaseTableViewController {
 extension ScoresViewController {
 
 	override func numberOfSections(in tableView: UITableView) -> Int {
-		return 1
+		return self.viewModel?.scoreGameItemCount ?? 0
 	}
 
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return self.viewModel.scoreItemCount
+		return self.viewModel?.scoreItemCount(for: section) ?? 0
 	}
 }
 
@@ -39,21 +44,42 @@ extension ScoresViewController {
 
 	override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
-		let headerImage: UIImage = R.image.score()!
-		let headerView = UIImageView(image: headerImage)
-		headerView.contentMode = .scaleAspectFit
-		return headerView
+		let title = self.viewModel?.sectionTitle(at: section)
+
+		if section == 0 {
+			guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: TableHeaderWithImage.reuseIdentifer) as? TableHeaderWithImage else {
+				return nil
+			}
+
+			header.label.text = title
+			header.imageView.image = R.image.score()
+
+			return header
+		} else {
+			guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: TableSectionHeader.reuseIdentifer) as? TableSectionHeader else {
+				return nil
+			}
+
+			header.label.text = title
+
+			return header
+		}
 	}
 
 	override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		return 180
+
+		if section == 0 {
+			return 180 + 52
+		} else {
+			return 52
+		}
 	}
 
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
 		let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath)
-		if let scoreItem = self.viewModel.scoreItem(at: indexPath.row) {
-			cell.textLabel?.text = "\(scoreItem.title) - \(scoreItem.player) - \(scoreItem.score)"
+		if let scoreItem = self.viewModel?.scoreItem(at: indexPath) {
+			cell.set(scoreItem: scoreItem)
 		}
 
 		return cell

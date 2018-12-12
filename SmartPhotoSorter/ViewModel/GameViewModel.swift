@@ -83,7 +83,11 @@ class GameViewModel {
 
 	func finishGame() {
 
-		print("finishGame")
+		let scoreValue = self.score()
+		print("finishGame: \(scoreValue)")
+
+		// add new score entry
+		AppCore.shared.gameUseCase.createScore(for: self.game, and: self.player, with: scoreValue)
 
 		// go to main menu
 		self.viewController?.navigationController?.popViewController(animated: true)

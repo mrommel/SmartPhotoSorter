@@ -18,6 +18,9 @@ protocol GameUseCaseProtocol {
 	func players() -> [Player]?
 	func player(by index: Int) -> Player?
 
+	func scores() -> [Score]?
+	@discardableResult func createScore(for game: Game?, and player: Player?, with scoreValue: Int) -> Score?
+
 	func reset()
 	func populate()
 }
@@ -71,5 +74,15 @@ class GameUserCase: GameUseCaseProtocol {
 	func populate() {
 
 		return self.dataProvider.populate()
+	}
+
+	func scores() -> [Score]? {
+
+		return self.dataProvider.scores()
+	}
+
+	@discardableResult func createScore(for game: Game?, and player: Player?, with scoreValue: Int) -> Score? {
+
+		return self.dataProvider.createScore(for: game, and: player, with: scoreValue)
 	}
 }

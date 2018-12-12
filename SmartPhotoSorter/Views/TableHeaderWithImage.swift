@@ -1,5 +1,5 @@
 //
-//  OptionsHeader.swift
+//  TableHeaderWithImage.swift
 //  SmartPhotoSorter
 //
 //  Created by Michael Rommel on 09.12.18.
@@ -8,9 +8,9 @@
 
 import UIKit
 
-class OptionsHeader: ThemeAwareHeaderFooterView {
+class TableHeaderWithImage: ThemeAwareHeaderFooterView {
 
-	static let reuseIdentifer = "OptionsHeaderReuseIdentifier"
+	static let reuseIdentifer = "TableHeaderWithImageReuseIdentifier"
 	let label = ThemeAwareLabel.init()
 	let imageView = UIImageView.init()
 

@@ -17,6 +17,9 @@ protocol DataProviderProtocol {
 	func players() -> [Player]?
 	func player(by index: Int) -> Player?
 
+	func scores() -> [Score]?
+	@discardableResult func createScore(for game: Game?, and player: Player?, with scoreValue: Int) -> Score?
+
 	func reset()
 	func populate()
 }
@@ -129,13 +132,22 @@ extension DataProvider {
 
 	func deleteGames() {
 
-		for game in self.games() ?? [] {
+		guard let games = self.games() else {
+			return
+		}
 
-			/*for photo in game.photos {
-				_ = dataController.deleteInBackground(object: photo)
-			}*/
+		for game in games {
 
-			_ = dataController.deleteInBackground(object: game)
+			guard let photos = game.photos?.allObjects as? [Photo] else {
+				continue
+			}
+
+			for photo in photos {
+				game.removeFromPhotos(photo)
+				dataController.deleteInBackground(object: photo)
+			}
+
+			dataController.deleteInBackground(object: game)
 		}
 	}
 }
@@ -174,14 +186,33 @@ extension DataProvider {
 
 	func scores() -> [Score]? {
 
-		return nil
+		let request: NSFetchRequest<Score> = Score.fetchRequest()
+		request.sortDescriptors = [NSSortDescriptor(key: "value", ascending: false)]
+		return dataController.fetchInBackground(request: request)
 	}
 
-	func createScore() {
+	func createScore(for game: Game?, and player: Player?, with scoreValue: Int) -> Score? {
+
+		let score: Score? = dataController.createInBackground()
+		score?.date = Date() as NSDate
+		score?.game = game
+		score?.player = player
+		score?.value = Int32(scoreValue)
+
+		self.dataController.saveInBackground()
+
+		return score
 
 	}
 
 	func deleteScores() {
 
+		guard let scores = self.scores() else {
+			return
+		}
+
+		for score in scores {
+			dataController.deleteInBackground(object: score)
+		}
 	}
 }

@@ -18,6 +18,7 @@ class ScoreCalculator {
 	func calculateScore(of arrayOfRanks: [Int]) -> Int {
 		let n = arrayOfRanks.count
 		let maximumNumberOfSwapsPossible = n * (n + 1) / 2
-		return (maximumNumberOfSwapsPossible - arrayOfRanks.bubbleSortCount()) * 5
+		//return (maximumNumberOfSwapsPossible - arrayOfRanks.bubbleSortCount()) * 5
+		return Int(Double(arrayOfRanks.bubbleSortCount()) / Double(maximumNumberOfSwapsPossible)) // in percent
 	}
 }

@@ -10,7 +10,7 @@
 /*** MainViewController ***/
 "Main.Title" = "Smart Photo Sorter";
 "Main.Menu.Games" = "Start Game";
-"Main.Menu.Scores" = "Start Scores";
+"Main.Menu.Scores" = "Show Scores";
 "Main.Menu.Options" = "Options";
 
 /*** GamesViewController ***/
