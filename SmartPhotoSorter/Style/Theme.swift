@@ -15,9 +15,9 @@ enum Theme: Int {
 	var mainColor: UIColor {
 		switch self {
 		case .light:
-			return UIColor().colorFromHexString("#8DBA77")
+			return UIColor.chelseaCucumber
 		case .dark:
-			return UIColor().colorFromHexString("#E35740")
+			return UIColor.cinnabar
 		}
 	}
 
@@ -42,27 +42,27 @@ enum Theme: Int {
 	var backgroundColor: UIColor {
 		switch self {
 		case .light:
-			return UIColor().colorFromHexString("#ffffff")
+			return UIColor.white
 		case .dark:
-			return UIColor().colorFromHexString("#363636")
+			return UIColor.darkGray
 		}
 	}
 
 	var titleTextColor: UIColor {
 		switch self {
 		case .light:
-			return UIColor().colorFromHexString("#363636")
+			return UIColor.darkGray
 		case .dark:
-			return UIColor().colorFromHexString("#ffffff")
+			return UIColor.white
 		}
 	}
 
 	var subtitleTextColor: UIColor {
 		switch self {
 		case .light:
-			return UIColor().colorFromHexString("#363636")
+			return UIColor.darkGray
 		case .dark:
-			return UIColor().colorFromHexString("#ffffff")
+			return UIColor.white
 		}
 	}
 }

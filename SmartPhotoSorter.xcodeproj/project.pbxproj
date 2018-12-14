@@ -52,6 +52,7 @@
 		046BAF7E21C0E9B100977071 /* UITableViewCell+ScoreItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BAF7D21C0E9B100977071 /* UITableViewCell+ScoreItem.swift */; };
 		4C44DA933C7BB50AEC0BFE09 /* Pods_SmartPhotoSorter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34612EFC80932ACCCEB9D72F /* Pods_SmartPhotoSorter.framework */; };
 		C9B61F8E21C3BEA400E74F7D /* UserPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B61F8D21C3BEA400E74F7D /* UserPickerView.swift */; };
+		C9B61F9021C3DCB000E74F7D /* UIColor+Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B61F8F21C3DCB000E74F7D /* UIColor+Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -105,6 +106,7 @@
 		936658439A35F1AA9D651967 /* Pods-SmartPhotoSorter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartPhotoSorter.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartPhotoSorter/Pods-SmartPhotoSorter.release.xcconfig"; sourceTree = "<group>"; };
 		B81A5B679A8B32BDDA3EC8AB /* Pods-SmartPhotoSorter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartPhotoSorter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartPhotoSorter/Pods-SmartPhotoSorter.debug.xcconfig"; sourceTree = "<group>"; };
 		C9B61F8D21C3BEA400E74F7D /* UserPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPickerView.swift; sourceTree = "<group>"; };
+		C9B61F8F21C3DCB000E74F7D /* UIColor+Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Constants.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +237,7 @@
 			children = (
 				0467EB0821BB0EB4009B9B78 /* Array+Sorting.swift */,
 				0467EB0A21BB0EE3009B9B78 /* UIColor+Parsing.swift */,
+				C9B61F8F21C3DCB000E74F7D /* UIColor+Constants.swift */,
 				046BAF7D21C0E9B100977071 /* UITableViewCell+ScoreItem.swift */,
 			);
 			path = Extensions;
@@ -441,6 +444,7 @@
 				0458728A21B7B686001B43A8 /* SmartPhotoSorter.xcdatamodeld in Sources */,
 				044DB9E021B95E04000B14DA /* Score+CoreDataProperties.swift in Sources */,
 				045872A021B7C8D2001B43A8 /* GamesViewController.swift in Sources */,
+				C9B61F9021C3DCB000E74F7D /* UIColor+Constants.swift in Sources */,
 				045872AA21B7DFC5001B43A8 /* R.generated.swift in Sources */,
 				0467EAFB21BA8A34009B9B78 /* OptionsViewController.swift in Sources */,
 				044DB9DE21B95E04000B14DA /* Photo+CoreDataProperties.swift in Sources */,
