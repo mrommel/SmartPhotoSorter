@@ -51,6 +51,7 @@
 		046BAF7921BE990700977071 /* GameUserCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BAF7821BE990700977071 /* GameUserCase.swift */; };
 		046BAF7E21C0E9B100977071 /* UITableViewCell+ScoreItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 046BAF7D21C0E9B100977071 /* UITableViewCell+ScoreItem.swift */; };
 		4C44DA933C7BB50AEC0BFE09 /* Pods_SmartPhotoSorter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34612EFC80932ACCCEB9D72F /* Pods_SmartPhotoSorter.framework */; };
+		C9B61F8E21C3BEA400E74F7D /* UserPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B61F8D21C3BEA400E74F7D /* UserPickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,6 +104,7 @@
 		34612EFC80932ACCCEB9D72F /* Pods_SmartPhotoSorter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SmartPhotoSorter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		936658439A35F1AA9D651967 /* Pods-SmartPhotoSorter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartPhotoSorter.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartPhotoSorter/Pods-SmartPhotoSorter.release.xcconfig"; sourceTree = "<group>"; };
 		B81A5B679A8B32BDDA3EC8AB /* Pods-SmartPhotoSorter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartPhotoSorter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartPhotoSorter/Pods-SmartPhotoSorter.debug.xcconfig"; sourceTree = "<group>"; };
+		C9B61F8D21C3BEA400E74F7D /* UserPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +248,7 @@
 				046BAF6C21BD467300977071 /* TableHeaderWithImage.swift */,
 				046BAF6E21BD48F700977071 /* TableSectionHeader.swift */,
 				046BAF7021BD493400977071 /* ThemeAwareHeaderFooterView.swift */,
+				C9B61F8D21C3BEA400E74F7D /* UserPickerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 				044DB9AA21B8068F000B14DA /* GameViewController.swift in Sources */,
 				0458729F21B7C8D2001B43A8 /* MainController.swift in Sources */,
 				0467EB0B21BB0EE3009B9B78 /* UIColor+Parsing.swift in Sources */,
+				C9B61F8E21C3BEA400E74F7D /* UserPickerView.swift in Sources */,
 				0467EB0621BB07F2009B9B78 /* ScoreCalculator.swift in Sources */,
 				0458728221B7B686001B43A8 /* AppDelegate.swift in Sources */,
 				0458729E21B7C8D2001B43A8 /* ScoresViewController.swift in Sources */,

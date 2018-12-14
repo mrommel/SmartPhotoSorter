@@ -110,8 +110,12 @@ extension GamesViewController: UIPickerViewDelegate {
 	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 		self.viewModel?.selectPlayerItem(at: row)
 	}
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        
+        let view = UserPickerView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: 160, height: 42)))
+        view.username = self.viewModel?.playerName(at: row)
 
-	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-		return self.viewModel?.playerName(at: row)
-	}
+        return view
+    }
 }

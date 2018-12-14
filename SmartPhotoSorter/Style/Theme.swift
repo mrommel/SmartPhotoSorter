@@ -44,14 +44,14 @@ enum Theme: Int {
 		case .light:
 			return UIColor().colorFromHexString("#ffffff")
 		case .dark:
-			return UIColor().colorFromHexString("#000000")
+			return UIColor().colorFromHexString("#363636")
 		}
 	}
 
 	var titleTextColor: UIColor {
 		switch self {
 		case .light:
-			return UIColor().colorFromHexString("#000000")
+			return UIColor().colorFromHexString("#363636")
 		case .dark:
 			return UIColor().colorFromHexString("#ffffff")
 		}
@@ -60,7 +60,7 @@ enum Theme: Int {
 	var subtitleTextColor: UIColor {
 		switch self {
 		case .light:
-			return UIColor().colorFromHexString("#000000")
+			return UIColor().colorFromHexString("#363636")
 		case .dark:
 			return UIColor().colorFromHexString("#ffffff")
 		}
